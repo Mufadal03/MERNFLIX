@@ -12,7 +12,7 @@ const tmdbEndpoints = {
 
     //GET DETAILS OF CASTS AND CREW MEMBERS
     mediaCredits: ({ mediaType, mediaId }) => generate_url(`${mediaType}/${mediaId}/credits`),
-
+ 
     //VIDEO
     mediaVideos: ({ mediaType, mediaId }) => generate_url(`${mediaType}/${mediaId}/videos`),
 

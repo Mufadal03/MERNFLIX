@@ -2,7 +2,7 @@ const getReq = require("../axios/customAxios");
 const { tmdbEndpoints } = require("./tmdb.endpoint");
 
 const tmdbApi = {
-    mediaList: async ({ mediaType, mediaCategory, page }) => await getReq(tmdbEndpoints.mediaList({ mediaType, mediaCategory, page })),
+    mediaList: async ({ mediaType, mediaCategory, page=1}) => await getReq(tmdbEndpoints.mediaList({ mediaType, mediaCategory, page })),
     
     mediaDetail: async ({ mediaType, mediaId }) => await getReq(tmdbEndpoints.mediaDetail({ mediaType, mediaId })),
     
@@ -25,7 +25,6 @@ const tmdbApi = {
     mediaWatchProvider: async ({ mediaType, mediaId }) => await getReq(tmdbEndpoints.mediaWatchProvider({ mediaType, mediaId })),
 
     trendingList: async({ mediaType, timeWindow }) =>await getReq(tmdbEndpoints.trendingList({mediaType,timeWindow}))
-    
-
-    
 }
+
+module.exports={tmdbApi}
