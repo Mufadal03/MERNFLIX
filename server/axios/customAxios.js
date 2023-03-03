@@ -2,9 +2,10 @@ const axios = require('axios')
 
 const getReq = async (url) => {
     try {
-        return {data} = await axios.get(url)
+      const response = await axios.get(url)
+      return response.data
     } catch (error) {
-      throw new Error('Got error while fetching')
+      return new Error(error.data)
     }
 }
-module.exports=getReq
+module.exports=getReq  
