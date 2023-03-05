@@ -25,7 +25,10 @@ const getDetail = async (req, res) => {
        media.credits = await tmdbApi.mediaCredits(payload)
        const recommendations = await tmdbApi.mediaRecommendations(payload)
        media.recommendation = recommendations.results
+       const similar = await tmdbApi.similarMedia(payload)
+       media.similar = similar.results
        media.images = await tmdbApi.mediaImages(payload)
+       media.watchProvide = await tmdbApi.mediaWatchProvider(payload)
        res.status(200).send(media)
    } catch (error) {
        console.log(error)
@@ -54,4 +57,27 @@ const getGenre = async (req, res) => {
         res.status(400).send(error)
     }
 }
-module.exports={getList,getDetail,getSearch,getGenre}           
+
+const getTrendingList = async(req, res) => {
+    const { mediaType, timeWindow } = req.params 
+    const payload = { mediaType, timeWindow }
+    try {
+        const data = await tmdbApi.trendingList(payload)
+        res.status(200).send(data)
+    } catch (error) {
+        res.status(400).send({response:error})
+    }
+}
+
+const getMediaByGenre = async(req, res) => {
+    const { mediaType } = req.params 
+    const { with_genres } = req.query 
+    console.log(req.params)
+    try {
+        const data = await tmdbApi.medaiByGenre({ mediaType, with_genres })
+        res.status(200).send(data)
+    } catch (error) {
+        res.status(400).send(error)
+    }
+}
+module.exports={getList,getDetail,getSearch,getGenre,getTrendingList,getMediaByGenre}           
