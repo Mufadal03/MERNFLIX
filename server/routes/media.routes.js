@@ -1,13 +1,17 @@
 const { Router } = require('express')
-const { getList, getDetail, getSearch, getGenre} = require('../controller/media.contorller')
-mediaController = Router()
+const { getList, getDetail, getSearch, getGenre, getTrendingList, getMediaByGenre} = require('../controller/media.contorller')
+mediaRoutes = Router()
+mediaRoutes.get('/discover/:mediaType',getMediaByGenre)
 
-mediaController.get('/:mediaType/:mediaCategory',getList)
+mediaRoutes.get('/:mediaType/:mediaCategory',getList)
 
-mediaController.get('/detail/:mediaType/:mediaId', getDetail)
+mediaRoutes.get('/detail/:mediaType/:mediaId', getDetail)
 
-mediaController.get('/find', getSearch)
+mediaRoutes.get('/find', getSearch)
 
-mediaController.get('/genre',getGenre)
+mediaRoutes.get('/genre', getGenre)
 
-module.exports={mediaController}
+mediaRoutes.get('/trending/:mediaType/:timeWindow', getTrendingList)
+
+
+module.exports={mediaRoutes}
