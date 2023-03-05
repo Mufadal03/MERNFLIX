@@ -24,7 +24,11 @@ const tmdbApi = {
     
     mediaWatchProvider: async ({ mediaType, mediaId }) => await getReq(tmdbEndpoints.mediaWatchProvider({ mediaType, mediaId })),
 
-    trendingList: async({ mediaType, timeWindow }) =>await getReq(tmdbEndpoints.trendingList({mediaType,timeWindow}))
+    trendingList: async ({ mediaType, timeWindow }) => await getReq(tmdbEndpoints.trendingList({ mediaType, timeWindow })),
+    
+    medaiByGenre: async ({ mediaType, with_genres }) => await getReq(tmdbEndpoints.mediaByGenre({ mediaType, with_genres })),
+    
+    similarMedia:async({mediaType,mediaId})=>await getReq(tmdbEndpoints.similarMedia({mediaType,mediaId}))
 }
 
 module.exports={tmdbApi}

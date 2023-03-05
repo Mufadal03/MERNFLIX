@@ -35,8 +35,13 @@ const tmdbEndpoints = {
     mediaWatchProvider: ({ mediaType, mediaId }) => generate_url(`${mediaType}/${mediaId}/watch/provider`),
     
     // TRENDING 
-    trendingList:({mediaType,timeWindow})=>generate_url(`/trending/${mediaType}/${timeWindow}`)
+    trendingList:({mediaType,timeWindow})=>generate_url(`/trending/${mediaType}/${timeWindow}`),
 
+    //GET SPECIFIC GENRE TYPE MEDIA EG:TV/ACTION MOVIE/FANTASY 
+    mediaByGenre: ({ mediaType, with_genres }) => generate_url(`/discover/${mediaType}`, { with_genres }),
+   
+    //YOU MAY ALSO LIKE
+    similarMedia:({mediaType,mediaId})=>generate_url(`/${mediaType}/${mediaId}/similar`)
 }
 
 module.exports={tmdbEndpoints}
