@@ -1,0 +1,6 @@
+.details{
+    display: none;
+}
+.MovieCard:hover .details{
+    display: block;
+}

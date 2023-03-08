@@ -11,7 +11,7 @@ const AllRoutes = () => {
           <Navbar />
           <Routes>
               <Route path='/' element={<Home />} />
-              <Route path='/:mediaType' element={<MediaByGenre/>} /> 
+              <Route path='/media/:mediaType' element={<MediaByGenre/>} /> 
               <Route path='/detail/:mediaType/:mediaId' element={<MediaDetail />} /> 
               <Route path='/person/:personId' element={<PersonDetail />} />
               <Route path='*' element={<h1>404 notfound</h1>} />
