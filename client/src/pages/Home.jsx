@@ -9,7 +9,7 @@ const Home = () => {
   const [Landing, setLanding] = useState()
   
   useEffect(() => {
-    mediaApi.getTrendingList({ mediaType: tmdbConfig.mediaType.movie, timeWindow: 'week' })
+    mediaApi.getTrendingList({ mediaType: tmdbConfig.mediaType.movie, timeWindow: 'day' })
       .then((res) => mediaApi.getDetail({ mediaType: tmdbConfig.mediaType.movie, mediaId: res.results[0].id }))
       .then((res) => {
         setLanding({
