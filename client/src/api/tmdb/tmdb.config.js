@@ -14,12 +14,14 @@ const posterImgUrl = (imgPath) => `https://image.tmdb.org/t/p/w500${imgPath}`
 
 const youtubeUrl = (videoId) => `https://www.youtube.com/embed/${videoId}?controls=0`
 
+const companyImgUrl = (imgPath) =>`https://image.tmdb.org/t/p/w200${imgPath}`
 
 const tmdbConfig = {
     mediaCategory,
     mediaType,
     backdropImgUrl,
     posterImgUrl,
-    youtubeUrl
+    youtubeUrl,
+    companyImgUrl
 }
 export default tmdbConfig
