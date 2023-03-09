@@ -6,8 +6,9 @@ import { Navigation, Scrollbar, A11y } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
+import { Link } from 'react-router-dom';
 
-const GenreRow = ({ title, api }) => {
+const GenreRow = ({ title, api ,to}) => {
     const [data, setData] = useState([])
     
     useEffect(() => {
@@ -20,7 +21,7 @@ const GenreRow = ({ title, api }) => {
       <Box>
           <Flex justifyContent={'space-between'} py='.5rem'>
               <Text textTransform={'capitalize'}>{title}</Text>
-              <Text mr='1rem'>Explore all</Text>
+              <Link to={to }><Text mr='1rem'>Explore all</Text></Link>
           </Flex>
           <Swiper
               modules={[Navigation, Scrollbar, A11y]}
@@ -32,7 +33,7 @@ const GenreRow = ({ title, api }) => {
                   data?.length > 0 && data?.map((el, i) => {
                       return (
                           <SwiperSlide key={i}>
-                              <MovieCard data={el} />
+                              <MovieCard data={el} to={to} />
                           </SwiperSlide>
                       )
                   })
