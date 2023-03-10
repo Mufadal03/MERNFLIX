@@ -6,13 +6,13 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 import PersonCard from './PersonCard'
+import { useParams } from 'react-router-dom';
 
 const Cast = ({ casts }) => {
-    console.log(casts)
+    const {mediaType} = useParams()
   return (
-      <Box bgColor='black' color={'white'} >
           <Box w='90vw' m='auto'>
-              <Heading fontWeight={'md'} mb='2rem'>Cast</Heading>
+              <Heading fontWeight={'md'} mb='2rem' textTransform={'capitalize'}>{mediaType==='tv'?"Series":mediaType } Cast</Heading>
            <Swiper
               modules={[Navigation, Scrollbar, A11y]}
               spaceBetween={10}
@@ -30,7 +30,6 @@ const Cast = ({ casts }) => {
               }
           </Swiper>
           </Box>
-    </Box>
   )
 }
 
