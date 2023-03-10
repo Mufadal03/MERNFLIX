@@ -1,12 +1,11 @@
-import { Box, CircularProgress, CircularProgressLabel, Flex, Heading, Image, Text } from '@chakra-ui/react'
-import React, { useEffect, useRef, useState } from 'react'
+import { Box, Flex, Image, Text } from '@chakra-ui/react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import tmdbConfig from '../api/tmdb/tmdb.config'
 import { genres } from '../utils/genreDb'
-import movieCss from './movie.module.css'
+import movieCss from './styles/movie.module.css'
 
 const MovieCard = ({ data }) => {
-  console.log(data)
     return (
   <>
             {data && <Link to={`/detail/${data.release_date?'movie':'tv'}/${data.id}`}><Box className={movieCss.MovieCard}>
@@ -22,12 +21,12 @@ const MovieCard = ({ data }) => {
                     }
                     </Text>
                 <Text>{(() => {
-                  let date = data.release_date || data.first_air_date 
-                  return date.slice(0,4)
+                  let date = data?.release_date || data?.first_air_date 
+                  return date?.slice(0,4)
                 })()}</Text>
                 </Flex>
                 <Text fontSize={'md'}>{(() => {
-                  let str = data.title || data.name
+                  let str = data?.title || data?.name
                   return str.length<=15?str:str?.slice(0,19)+'....'
                 })() }</Text>
               </Flex>
