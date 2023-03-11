@@ -33,11 +33,11 @@ const Navbar = () => {
     const navRef = useRef()
     useEffect(() => {
         const scrollFn = () => {
-            if (window.pageYOffset > 15) {
-                navRef.current.style.backgroundColor = 'black'
+            if (window.pageYOffset > 15 && navRef.current) {
+                navRef.current && (navRef.current.style.backgroundColor = 'black')
             }
-            if (window.pageYOffset < 15) {
-                navRef.current.style.backgroundColor='transparent'
+            if (window.pageYOffset < 15 && navRef.current) {
+                navRef.current && (navRef.current.style.backgroundColor='transparent')
                 
             }
         }

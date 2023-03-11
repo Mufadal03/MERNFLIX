@@ -1,11 +1,11 @@
-import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text } from '@chakra-ui/react'
-import React, { useEffect, useRef, useState } from 'react'
+import {  Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalOverlay } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 import YouTube from 'react-youtube';
 import './styles/modal.css'
 const PlayTrailer = ({ isOpen, onClose, videos }) => {
   const [trailer, setTrailer] = useState()
   const [videoIndex, setVideoIndex] = useState(0)
-  const playerRef = useRef()
+  console.log(videos)
     useEffect(() => {
         const video = videos?.filter((el) => el.type === 'Trailer')
         setTrailer(video)
@@ -22,8 +22,8 @@ const PlayTrailer = ({ isOpen, onClose, videos }) => {
         console.log(e)
     }
   const onErrorFn = (e) => {
-      console.log('error')
-      if(videoIndex<trailer.length)setVideoIndex((prev)=>prev+1)
+    if(videoIndex<trailer.length)setVideoIndex((prev)=>prev+1)
+    else console.log('error')
   }
  
   return (
@@ -35,7 +35,7 @@ const PlayTrailer = ({ isOpen, onClose, videos }) => {
             {/* <ModalHeader><Text className='test'>trailer</Text></ModalHeader> */}
           <ModalCloseButton />
           <ModalBody>
-            {trailer?.length > 0 ? <YouTube className='Trailer_player'  videoId={trailer[videoIndex].key} opts={opts} onReady={onReadyFn} onError={onErrorFn} />:'TRAILER NOT FOUND'}
+            {trailer?.length > 0 ? <YouTube className='Trailer_player'  videoId={trailer[videoIndex]?.key} opts={opts} onReady={onReadyFn} onError={onErrorFn} />:'TRAILER NOT FOUND'}
           </ModalBody>
           <ModalFooter>
           </ModalFooter>

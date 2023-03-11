@@ -8,8 +8,8 @@ import movieCss from './styles/movie.module.css'
 const MovieCard = ({ data }) => {
     return (
   <>
-            {data && <Link to={`/detail/${data.release_date?'movie':'tv'}/${data.id}`}><Box className={movieCss.MovieCard}>
-          <Image src={tmdbConfig.posterImgUrl(data.poster_path)} alt={data.title} pos='relative' />
+            {data && <Link to={`/detail/${data.release_date?'movie':'tv'}/${data.id}`}><Box pos='relative' className={movieCss.MovieCard}>
+          <Image src={tmdbConfig.posterImgUrl(data.poster_path)} alt={data.title}  />
           <Box className={movieCss.details} pos='absolute' top='0'  h='100%' w='100%'>
               <Flex justifyContent={'flex-end'} h='inherit' direction={'column'} p='.2rem ' gap='.3rem'>
                 

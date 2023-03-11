@@ -1,5 +1,5 @@
-import { Box, Flex } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import {Flex } from '@chakra-ui/react'
+import React from 'react'
 import mediaApi from '../api/modules/media.api'
 import GenreRow from './GenreRow'
 

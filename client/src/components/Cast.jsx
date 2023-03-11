@@ -1,4 +1,4 @@
-import { Box, Flex, Heading } from '@chakra-ui/react'
+import { Box, Heading } from '@chakra-ui/react'
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Scrollbar, A11y } from 'swiper';

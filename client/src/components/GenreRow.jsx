@@ -7,15 +7,21 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 import { Link } from 'react-router-dom';
+import RowLoading from './Loaders/RowLoading';
 
 const GenreRow = ({ title, api ,to}) => {
     const [data, setData] = useState([])
+    const [loading,setLoading] = useState(false)
     
     useEffect(() => {
+        setLoading(true)
         api.then((res) => {
             setData([...res.results])
+            setLoading(false)
         }).catch((err)=>console.log(err))
     }, [])
+
+    if(loading) return <RowLoading />
     
   return (
       <Box>
@@ -33,7 +39,7 @@ const GenreRow = ({ title, api ,to}) => {
                   data?.length > 0 && data?.map((el, i) => {
                       return (
                           <SwiperSlide key={i}>
-                              <MovieCard data={el} to={to} />
+                              <MovieCard data={el} />
                           </SwiperSlide>
                       )
                   })
