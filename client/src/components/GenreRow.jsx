@@ -19,7 +19,7 @@ const GenreRow = ({ title, api ,to}) => {
             setData([...res.results])
             setLoading(false)
         }).catch((err)=>console.log(err))
-    }, [])
+    }, [api])
 
     if(loading) return <RowLoading />
     
