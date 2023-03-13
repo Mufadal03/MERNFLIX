@@ -49,7 +49,7 @@ const Navbar = () => {
     textDecoration: "underline",
   };  
   return (
-      <Box pos={'absolute'} zIndex={10} >
+      <Box pos={'absolute'} zIndex={10} display={{base:'none',md:'block'}}>
            <Flex ref={navRef} style={{background: 'linear-gradient(0deg, rgba(34,193,195,0) 0%, rgba(36,36,36,1) 100%)'}} pos='fixed' top={0} w='100vw' alignItems={'center'} p='.6rem 2rem' color={'#E5E5E5'} >
           <Box>
               <Image h='40px' src='https://fontmeme.com/permalink/230305/45fcbc47916afa4eed29a10ff819946b.png' alt='Logo' />

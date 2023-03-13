@@ -20,9 +20,11 @@ const MediaCollection = () => {
   }, [mediaType])
     
     useEffect(() => {
+        console.log(page)
         const fetchMedia = async () => {
             try {
-                const response = await generateUrl(category,mediaApi,page,genres,mediaType)
+                const response = await generateUrl(category, mediaApi, page, genres, mediaType)
+                console.log(response)
                 if (page === 1) setMedia(response.results)
                 else setMedia(prev=>[...prev,...response.results])
             } catch (error) {
@@ -32,8 +34,8 @@ const MediaCollection = () => {
         fetchMedia()
     },[mediaType,page])
   return (
-      <Box bgColor='black'>
-          <Grid w='90vw'py='2rem' m='auto' gridTemplateColumns={'repeat(5,1fr)'} gap='.5rem'>
+      <Box>
+          <Grid w='95vw'py='2rem' m='auto' gridTemplateColumns={{base:'repeat(2,1fr)',sm:'repeat(3,1fr)',md:'repeat(4,1fr)',lg:'repeat(5,1fr)'}} gap='.5rem'>
               {
                   media?.length > 0 && media?.map((el,i) => {
                       return (

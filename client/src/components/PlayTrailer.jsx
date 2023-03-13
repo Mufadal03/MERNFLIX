@@ -5,7 +5,6 @@ import './styles/modal.css'
 const PlayTrailer = ({ isOpen, onClose, videos }) => {
   const [trailer, setTrailer] = useState()
   const [videoIndex, setVideoIndex] = useState(0)
-  console.log(videos)
     useEffect(() => {
         const video = videos?.filter((el) => el.type === 'Trailer')
         setTrailer(video)

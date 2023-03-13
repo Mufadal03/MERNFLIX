@@ -8,13 +8,35 @@ const Recommendation = ({data}) => {
   return (
       <Box w='90vw' m='auto'>
           <Flex justifyContent={'space-between'} py='.5rem'>
-              <Text textTransform={'capitalize'}>YOU MAY ALSO LIKE</Text>
+              <Text textTransform={'capitalize'}fontSize={{base:'sm',md:'md',lg:'lg'}}>YOU MAY ALSO LIKE</Text>
           </Flex>
           <Swiper
               modules={[Navigation, Scrollbar, A11y]}
               spaceBetween={10}
               slidesPerView={8}
               navigation
+              breakpoints={{
+                  100: {
+                       slidesPerView: 3,
+                        spaceBetween: 10,
+                  },
+                    640: {
+                        slidesPerView: 4,
+                        spaceBetween: 10,
+                    },
+                    768: {
+                        slidesPerView: 5,
+                        spaceBetween: 10,
+                    },
+                    1024: {
+                        slidesPerView: 6,
+                        spaceBetween: 10,
+                  },
+                  1025: {
+                      slidesPerView: 8, 
+                      spaceBetween:10
+                    }
+        }}
           >
               {
                   data?.length > 0 && data?.map((el, i) => {

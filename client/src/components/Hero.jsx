@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import mediaApi from '../api/modules/media.api'
 import tmdbConfig from '../api/tmdb/tmdb.config'
@@ -42,41 +42,51 @@ const Hero = () => {
           tagline:details.tagline,
           rating: details.vote_average,
           video: details.video.results,
-          language:details.spoken_languages[0].english_name
+          language: details.spoken_languages[0].english_name,
+          poster:details.poster_path
         })
       } catch (error) {
         console.log('show error on toast',error)
       }
     }
     FetchMedia()
-  }, [mediaType, location,seachParams,page])
+  }, [mediaType, location, seachParams, page])
   if (loading) return <HeroLoading />
-  console.log(data)
     return (
-      <Box h='100vh'>
-            <Flex justifyContent={'center'} alignItems='center' h='100vh' style={{backgroundImage:`linear-gradient(to right,rgb(0, 0, 0), rgba(0, 0, 0, 0)) , url(${tmdbConfig.backdropImgUrl(data?.backdrop)})`,backgroundPosition:'center',backgroundSize:'cover'}}>
-            <Flex alignItems={'center'} w='95%' h='90%' color='white'>
-                <Flex direction={'column'} w='50%' gap='1rem'>
-              <Flex direction={'column'} gap='.3rem'>
-                <Heading fontSize={'6xl'}>{data?.title}</Heading>
-              <Text fontStyle={'italic'} fontSize='lg' color='rgba(115, 114, 114, 0.5)'>{data?.tagline }</Text>
+      <Flex h='100vh' justifyContent={'center'} >
+
+        <Flex w={{ base: '85vw', sm: '100vw' }} mt={{ base: '1.5rem', sm: '0' }} h={{ base: '85vh', sm: '100vh' }} bgImage={{ base: `url(${tmdbConfig.posterImgUrl(data?.poster)})`, sm: `url(${tmdbConfig.backdropImgUrl(data?.backdrop)})` }} bgPos='center' bgSize={'cover'} borderRadius={{ base: 'md', sm: 'none' }}>
+          
+          <Flex alignItems={{ base: 'flex-end', sm: 'center' }} py={{ base: '.5rem' }} w='100%' h='100%' px={{ base: '1%', sm: '2.5%' }} style={{ backgroundImage: `linear-gradient(240deg, rgba(34,193,195,0) 0%, rgba(0,0,0,0.9024859943977591) 90%)`}} >
+            
+            <Flex direction={'column'} w={{ base: '100%', sm: '70%', md: '60%',lg:'50%' }} gap='1.2rem'>
+              
+              <Flex direction={'column'} gap='.3rem' display={{ base: 'none', sm: 'block' }}>
+                
+                <Heading fontSize={'6xl'} >{data?.title}</Heading>
+
+                <Text fontStyle={'italic'} fontSize='lg' color='rgba(115, 114, 114, 0.5)' >{data?.tagline}</Text>
+                
                 </Flex>
-                <Text fontSize={'lg'} fontStyle='italic'>{data?.description}</Text>
-                <Flex gap='.5rem' alignItems={'center'}>
+                <Text fontSize={'lg'} fontStyle='italic' display={{base:'none',sm:'block',md:'block'}}>{data?.description}</Text>
+                <Flex gap='.5rem' alignItems={'center'} justifyContent={{base:'center',sm:'flex-start'}}>
                   {
                 
-                    data?.genres.map((el,i) => i<data?.genres.length-1?<><GenreTypeCard bg='transparent' key={el.id} name={ el.name} /><Text as={'span'} h='5px' w='5px' bgColor='white' borderRadius={'full'}></Text></>:<GenreTypeCard bg='transparent'  key={el.id} name={ el.name} />)
+                    data?.genres.map((el,i) => data?.genres.length-1?<Flex key={el.id} alignItems={'center'}><GenreTypeCard bg='transparent' key={el.id} name={ el.name} /><Text as={'span'} h='5px' w='5px' bgColor='white' borderRadius={'full'}></Text></Flex>:<GenreTypeCard bg='transparent'  key={el.id} name={ el.name} />)
                   }
                 </Flex>
-                <Flex gap='1rem'>
-                  <Button size={'lg'} leftIcon={<AiFillCaretRight />} bgColor='rgba(115, 114, 114, 0.5)' border='1px solid rgba(115, 114, 114, 0.5)' onClick={onOpen} _hover={{ backgroundColor: 'transparent' }} fontSize='lg'>Play trailer</Button>
-                  <Button size={'lg'}leftIcon={<AiOutlineInfoCircle/>} bgColor='rgba(115, 114, 114, 0.5)' border='1px solid rgba(115, 114, 114, 0.5)' onClick={()=>navigate(`/detail/${mediaType || data?.mediaType}/${data?.id}`)}  _hover={{backgroundColor:'transparent'}} fontSize='lg'>More Info</Button>
-                </Flex>
-                </Flex>
+                <Flex gap='1rem' justifyContent={{base:'center',sm:'flex-start'}}>
+                  <Button size={{base:'md',md:'lg'}} leftIcon={<AiFillCaretRight />} bgColor='rgba(115, 114, 114, 0.5)' border='1px solid rgba(115, 114, 114, 0.5)' onClick={onOpen} _hover={{ backgroundColor: 'transparent' }} >Play trailer</Button>
+                  <Button size={{base:'md',md:'lg'}}leftIcon={<AiOutlineInfoCircle/>} bgColor='rgba(115, 114, 114, 0.5)' border='1px solid rgba(115, 114, 114, 0.5)' onClick={()=>navigate(`/detail/${mediaType || data?.mediaType}/${data?.id}`)}  _hover={{backgroundColor:'transparent'}} fontSize='lg'>More Info</Button>
               </Flex>
+              
+            </Flex>
+            
+              </Flex>
+              
         </Flex>
         <PlayTrailer isOpen={isOpen} onClose={onClose} videos={data?.video}/>
-      </Box>
+      </Flex>
   )
 }
 
