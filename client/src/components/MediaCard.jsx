@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { genres } from '../utils/genreDb'
 import movieCss from './styles/movie.module.css'
 
-const MovieCard = ({ data ,genreFontSize,titleFontSize,dateFontSize,titleLength}) => {
+const MediaCard = ({ data ,genreFontSize,titleFontSize,dateFontSize,titleLength}) => {
     return (
   <>
         {data && <Link to={`/detail/${data.release_date ? 'movie' : 'tv'}/${data.id}`}>
@@ -16,7 +16,7 @@ const MovieCard = ({ data ,genreFontSize,titleFontSize,dateFontSize,titleLength}
                 <Flex alignItems='center' justifyContent={'space-between'}>
                     <Text textTransform={'uppercase'} border='1px solid rgba(255, 250, 250, 0.4)'  w={'fit-content'} fontSize={genreFontSize || 'sm'} px='.5rem' borderRadius={'1px'} color='rgb(243, 236, 236)'>
 {
-                        genres.filter((el)=>el.id===data.genre_ids[0]).map((el)=>el.name)
+                        genres.filter((el)=>el.id===(data?.genre_ids?.length > 0  ? data?.genre_ids[0]:'')).map((el)=>el.name)
                         
                     }
                     </Text>
@@ -37,4 +37,4 @@ const MovieCard = ({ data ,genreFontSize,titleFontSize,dateFontSize,titleLength}
   )
 }
 
-export default MovieCard
+export default MediaCard

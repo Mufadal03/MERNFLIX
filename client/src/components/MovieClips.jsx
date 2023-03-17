@@ -16,7 +16,8 @@ const MovieClips = ({ data }) => {
     }, [data])
     if(clips?.length<=0)return 
     const onVideoEnd = (e) => {
-        alert("video ended")
+    e.target.seekTo(0, false)
+    e.target.pauseVideo()
     }
    return (
             <Box w='90vw' m='auto'>

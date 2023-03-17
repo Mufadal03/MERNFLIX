@@ -6,7 +6,8 @@ const PlayTrailer = ({ isOpen, onClose, videos }) => {
   const [trailer, setTrailer] = useState()
   const [videoIndex, setVideoIndex] = useState(0)
     useEffect(() => {
-        const video = videos?.filter((el) => el.type === 'Trailer')
+      let video = videos?.filter((el) => el.type === 'Trailer')
+      if(video?.length===0)video = videos?.filter((el) => el.type === 'Teaser')
         setTrailer(video)
     }, [videos])
   const opts = {
@@ -24,7 +25,10 @@ const PlayTrailer = ({ isOpen, onClose, videos }) => {
     if(videoIndex<trailer.length)setVideoIndex((prev)=>prev+1)
     else console.log('error')
   }
- 
+  const onEndFn = (e) => {
+    e.target.seekTo(0, false)
+    e.target.pauseVideo()
+  }
   return (
    <>
 
@@ -34,7 +38,7 @@ const PlayTrailer = ({ isOpen, onClose, videos }) => {
             {/* <ModalHeader><Text className='test'>trailer</Text></ModalHeader> */}
           <ModalCloseButton />
           <ModalBody>
-            {trailer?.length > 0 ? <YouTube className='Trailer_player'  videoId={trailer[videoIndex]?.key} opts={opts} onReady={onReadyFn} onError={onErrorFn} />:'TRAILER NOT FOUND'}
+            {trailer?.length > 0 ? <YouTube className='Trailer_player'  videoId={trailer[videoIndex]?.key} opts={opts} onReady={onReadyFn} onEnd={onEndFn} onError={onErrorFn} />:'TRAILER NOT FOUND'}
           </ModalBody>
           <ModalFooter>
           </ModalFooter>

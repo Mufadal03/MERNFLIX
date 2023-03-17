@@ -25,11 +25,9 @@ const Hero = () => {
         setLoading(true)
         const medias = ['tv', 'movie']
         const customMediaType = medias[Math.floor(Math.random() * 2)]
-        const response = await (location.pathname==='/'?mediaApi.getTrendingList({ mediaType:customMediaType, timeWindow: 'day' }):generateUrl(category,mediaApi,page,genres,mediaType))
-        const index = Math.floor(Math.random() * 5)
+        const response = await (location.pathname === '/' ? mediaApi.getTrendingList({ mediaType: customMediaType, timeWindow: 'day' }) : generateUrl(category, mediaApi, page, genres, mediaType))
+        const index = Math.floor(Math.random() * 4)
         const details = await mediaApi.getDetail({ mediaType: mediaType || customMediaType, mediaId: response.results[index].id })
-        console.log(details)
-        setLoading(false)
         setData({
           id: details.id,
           mediaType:details.release_date?"movie":'tv',
@@ -45,6 +43,7 @@ const Hero = () => {
           language: details.spoken_languages[0].english_name,
           poster:details.poster_path
         })
+        setLoading(false)
       } catch (error) {
         console.log('show error on toast',error)
       }

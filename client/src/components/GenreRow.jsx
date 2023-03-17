@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import MovieCard from './MovieCard'
+import MediaCard from './MediaCard'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Scrollbar, A11y } from 'swiper';
 import 'swiper/css';
@@ -21,7 +21,7 @@ const GenreRow = ({ title, api ,to}) => {
         }).catch((err)=>console.log(err))
     }, [api])
 
-    if(loading) return <RowLoading />
+    
     
   return (
       <Box>
@@ -29,7 +29,8 @@ const GenreRow = ({ title, api ,to}) => {
               <Text textTransform={'capitalize'} fontSize={{base:'sm',md:'md',lg:'lg'}}>{title}</Text>
               <Link to={to }><Text mr='1rem' fontSize={{base:'sm',md:'md',lg:'lg'}}>Explore all</Text></Link>
           </Flex>
-          <Swiper
+          {
+              loading?<RowLoading />: <Swiper
               modules={[Navigation, Scrollbar, A11y]}
               spaceBetween={10}
               slidesPerView={8}
@@ -61,12 +62,13 @@ const GenreRow = ({ title, api ,to}) => {
                   data?.length > 0 && data?.map((el, i) => {
                       return (
                           <SwiperSlide key={i}>
-                              <MovieCard data={el} />
+                              <MediaCard data={el} />
                           </SwiperSlide>
                       )
                   })
               }
           </Swiper>
+         }
       </Box>
   )
 }

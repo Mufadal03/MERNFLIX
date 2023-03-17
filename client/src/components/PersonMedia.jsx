@@ -2,7 +2,8 @@ import { Box, Button, Flex, Grid, GridItem } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import PersonApi from '../api/modules/person.api'
-import MovieCard from './MovieCard'
+import LoadMore from './LoadMore'
+import MovieCard from './MediaCard'
 
 const PersonMedia = () => {
   const { personId } = useParams()
@@ -39,8 +40,8 @@ const PersonMedia = () => {
   }
   if(loading)return <h1>Loading....</h1>
   return (
-    <Box>
-      <Grid gridTemplateColumns={'repeat(5,1fr)'} gap='1rem'>
+    <Box  >
+      <Grid py='2rem' gridTemplateColumns={'repeat(5,1fr)'} gap='1rem'>
         {
           data?.length > 0 && data?.map((media,i) => {
             return (
@@ -51,7 +52,7 @@ const PersonMedia = () => {
           })
         }
       </Grid>
-    { data.length< medias.length && <Flex justifyContent={'center'} onClick={loadMore}> <Button colorScheme={'orange'}>Load more</Button></Flex>}
+    { data.length< medias.length && <LoadMore onClick={loadMore} />}
     </Box>
   )
 }

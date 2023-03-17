@@ -2,7 +2,7 @@ import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
 import { A11y, Navigation, Scrollbar } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import MovieCard from './MovieCard'
+import MediaCard from './MediaCard'
 
 const Recommendation = ({data}) => {
   return (
@@ -42,7 +42,7 @@ const Recommendation = ({data}) => {
                   data?.length > 0 && data?.map((el, i) => {
                       return (
                           <SwiperSlide key={i}>
-                              <MovieCard data={el} />
+                              <MediaCard data={el} />
                           </SwiperSlide>
                       )
                   })
