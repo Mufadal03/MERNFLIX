@@ -52,7 +52,7 @@ const Hero = () => {
   }, [mediaType, location, seachParams, page])
   if (loading) return <HeroLoading />
     return (
-      <Flex h='100vh' justifyContent={'center'} >
+      <Flex h='100vh' justifyContent={'center'} fontFamily='bebas' >
 
         <Flex w={{ base: '85vw', sm: '100vw' }} mt={{ base: '1.5rem', sm: '0' }} h={{ base: '85vh', sm: '100vh' }} bgImage={{ base: `url(${tmdbConfig.posterImgUrl(data?.poster)})`, sm: `url(${tmdbConfig.backdropImgUrl(data?.backdrop)})` }} bgPos='center' bgSize={'cover'} borderRadius={{ base: 'md', sm: 'none' }}>
           
@@ -62,12 +62,12 @@ const Hero = () => {
               
               <Flex direction={'column'} gap='.3rem' display={{ base: 'none', sm: 'block' }}>
                 
-                <Heading fontSize={'6xl'} >{data?.title}</Heading>
+                <Heading fontSize={'5xl'} fontFamily='bebas' >{data?.title}</Heading>
 
                 <Text fontStyle={'italic'} fontSize='lg' color='rgba(115, 114, 114, 0.5)' >{data?.tagline}</Text>
                 
                 </Flex>
-                <Text fontSize={'lg'} fontStyle='italic' display={{base:'none',sm:'block',md:'block'}}>{data?.description}</Text>
+                <Text fontSize={'md'} fontStyle='' display={{base:'none',sm:'block',md:'block'}}>{data?.description}</Text>
                 <Flex gap='.5rem' alignItems={'center'} justifyContent={{base:'center',sm:'flex-start'}}>
                   {
                 
@@ -75,8 +75,8 @@ const Hero = () => {
                   }
                 </Flex>
                 <Flex gap='1rem' justifyContent={{base:'center',sm:'flex-start'}}>
-                  <Button size={{base:'md',md:'lg'}} leftIcon={<AiFillCaretRight />} bgColor='rgba(115, 114, 114, 0.5)' border='1px solid rgba(115, 114, 114, 0.5)' onClick={onOpen} _hover={{ backgroundColor: 'transparent' }} >Play trailer</Button>
-                  <Button size={{base:'md',md:'lg'}}leftIcon={<AiOutlineInfoCircle/>} bgColor='rgba(115, 114, 114, 0.5)' border='1px solid rgba(115, 114, 114, 0.5)' onClick={()=>navigate(`/detail/${mediaType || data?.mediaType}/${data?.id}`)}  _hover={{backgroundColor:'transparent'}} fontSize='lg'>More Info</Button>
+                  <Button fontWeight='md'  borderRadius={'sm'}size={{base:'md',md:'md'}} leftIcon={<AiFillCaretRight />} bgColor='rgba(115, 114, 114, 0.5)' border='1px solid rgba(115, 114, 114, 0.5)' onClick={onOpen} _hover={{ backgroundColor: 'transparent' }} >Play trailer</Button>
+                  <Button fontWeight='md'  borderRadius={'sm'} size={{base:'md',md:'md'}}leftIcon={<AiOutlineInfoCircle/>} bgColor='rgba(115, 114, 114, 0.5)' border='1px solid rgba(115, 114, 114, 0.5)' onClick={()=>navigate(`/detail/${mediaType || data?.mediaType}/${data?.id}`)}  _hover={{backgroundColor:'transparent'}} fontSize='lg'>More Info</Button>
               </Flex>
               
             </Flex>

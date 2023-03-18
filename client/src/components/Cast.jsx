@@ -12,7 +12,7 @@ const Cast = ({ casts }) => {
     const {mediaType} = useParams()
   return (
           <Box w='90vw' m='auto'>
-              <Heading fontWeight={'md'} mb='2rem' textTransform={'capitalize'}>{mediaType==='tv'?"Series":mediaType } Cast</Heading>
+              <Heading fontWeight={'md'} fontSize='2xl' fontFamily='bebas' mb='1rem' textTransform={'capitalize'}>{mediaType==='tv'?"Series":mediaType } Cast</Heading>
            <Swiper
               modules={[Navigation, Scrollbar, A11y]}
               spaceBetween={10}

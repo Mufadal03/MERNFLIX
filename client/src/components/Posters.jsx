@@ -11,7 +11,7 @@ const Posters = ({ data }) => {
   return (
     (
               <Box  w='90vw' m='auto'>
-              <Heading fontWeight={'md'} py='1rem'>POSTERS</Heading>
+              <Heading fontWeight={'md'} fontSize='3xl' fontFamily={'bebas'} py='1rem'>Posters</Heading>
           <Swiper
               modules={[Navigation, Scrollbar, A11y]}
               spaceBetween={10}

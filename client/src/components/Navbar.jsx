@@ -72,7 +72,7 @@ const Navbar = () => {
         padding:'5px'
   };  
   return (
-      <Flex  pos={'absolute'} zIndex={10} display={{base:'none',md:'block'}}>
+      <Flex  pos={'absolute'} zIndex={10} display={{base:'none',md:'block'}} fontFamily='bebas'>
            <Flex ref={navRef} style={{background: 'linear-gradient(0deg, rgba(1,1,1,0) 0%, rgba(1,1,1,1) 100%)'}} pos='fixed' top={0} w='100vw' alignItems={'center'} p='.6rem 2rem' color={'#E5E5E5'} >
           <Box>
               <Image h='40px' src='https://fontmeme.com/permalink/230305/45fcbc47916afa4eed29a10ff819946b.png' alt='Logo' />
@@ -80,12 +80,12 @@ const Navbar = () => {
           <Flex flexGrow='3' gap='1.5rem' pl='2rem'>
               {
                   navOptions.map((item) => {
-                      return <NavLink style={({isActive})=>isActive?activeStyle:{padding:'5px'}} key={item.id} to={ item.link}>{ item.name}</NavLink>
+                      return <NavLink style={({isActive})=>isActive?activeStyle:{padding:'5px'}} key={item.id} to={ item.link} ><Text fontSize={'sm'}>{ item.name}</Text></NavLink>
                 })
               }
           </Flex>
           <Flex  flexGrow={'2'} justifyContent={'flex-end'} alignItems='center' gap='2rem' pr='2rem' >
-              <Text><NavLink style={({isActive})=>isActive?activeStyle:{padding:'5px'}} to='/search'>Search</NavLink></Text>
+              <Text fontSize={'sm'}><NavLink style={({isActive})=>isActive?activeStyle:{padding:'5px'}} to='/search'>Search</NavLink></Text>
                   {
                       isAuth ?<Menu >
                                 <MenuButton p='5px 20px' borderRadius={'base'} border='1px solid red'>
@@ -98,7 +98,7 @@ const Navbar = () => {
                                     <MenuItem onClick={handleLogout} style={{backgroundColor:'rgba(19, 19, 19,0.9)'}} >Sign Out</MenuItem>
                                 </MenuList>
                                 </Menu>
-                           : <Link to='/account/login'><Text>Login</Text></Link>
+                           : <Link to='/account/login'><Text fontSize={'sm'}>Login</Text></Link>
                }
           </Flex>
     </Flex>

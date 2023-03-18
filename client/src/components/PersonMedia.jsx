@@ -11,7 +11,10 @@ const PersonMedia = () => {
   const [data, setData] = useState([])
   const [page, setPage] = useState(1)
   const [loading,setLoading] = useState(false)
-  const skip =10
+  const skip = 10
+  useEffect(() => {
+    window.scrollTo(0,0)
+  },[personId])
   useEffect(() => {
     const fetchPersonMedia = async() => {
       try {

@@ -8,7 +8,7 @@ const Recommendation = ({data}) => {
   return (
       <Box w='90vw' m='auto'>
           <Flex justifyContent={'space-between'} py='.5rem'>
-              <Text textTransform={'capitalize'}fontSize={{base:'sm',md:'md',lg:'lg'}}>YOU MAY ALSO LIKE</Text>
+              <Text textTransform={'capitalize'} fontFamily='bebas' fontSize={{base:'sm',md:'md',lg:'lg'}}>you may also like</Text>
           </Flex>
           <Swiper
               modules={[Navigation, Scrollbar, A11y]}

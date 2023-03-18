@@ -25,9 +25,9 @@ const GenreRow = ({ title, api ,to}) => {
     
   return (
       <Box>
-          <Flex justifyContent={'space-between'} py='.5rem' >
-              <Text textTransform={'capitalize'} fontSize={{base:'sm',md:'md',lg:'lg'}}>{title}</Text>
-              <Link to={to }><Text mr='1rem' fontSize={{base:'sm',md:'md',lg:'lg'}}>Explore all</Text></Link>
+          <Flex justifyContent={'space-between'} py='.5rem' fontFamily={'bebas'}>
+              <Text textTransform={'capitalize'} fontSize={{base:'sm',md:'sm',lg:'md'}}>{title}</Text>
+              <Link to={to }><Text mr='1rem' fontSize={{base:'sm',md:'sm',lg:'md'}}>Explore all</Text></Link>
           </Flex>
           {
               loading?<RowLoading />: <Swiper

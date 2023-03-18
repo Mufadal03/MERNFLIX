@@ -10,7 +10,7 @@ import './styles/slides.css'
 const Backdrops = ({ data }) => {
     return (
             <Box w='90vw' m='auto'>
-             <Heading fontWeight={'md'} py='1rem'>BACKDROPS</Heading>
+             <Heading fontWeight={'md'} fontSize='3xl' fontFamily={'bebas'} py='1rem'>Backdrops</Heading>
 
           <Swiper
               modules={[Navigation, Scrollbar, A11y]}
