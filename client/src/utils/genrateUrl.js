@@ -1,13 +1,15 @@
-export const generateUrl = (category, mediaApi, page, genres, mediaType) => {
-    if (!category) {
-        return mediaApi.getList({ mediaType, mediaCategory: 'popular', page })
-    }
-    if (category === 'popular' || category === 'top_rated') {
-        return mediaApi.getList({ mediaType, mediaCategory: category, page })
-    }
-    if (category === 'trending') {
+export const generateUrl = (genre, mediaApi, page, tvGenres,movieGenres, mediaType) => {
+    if (!genre) {
         return mediaApi.getTrendingList({ mediaType, timeWindow: 'day', page })
     }
-    const genre = genres.find(el => el.name === category)
-    return mediaApi.getMediaByGenre({ mediaType, genreId: genre.id })
+    if (genre === 'popular' || genre === 'top_rated') {
+        return mediaApi.getList({ mediaType, mediaCategory: genre, page })
+    }
+    if (genre === 'trending') {
+        return mediaApi.getTrendingList({ mediaType, timeWindow: 'day', page })
+    }
+    const genreCollection = mediaType === 'tv' ? tvGenres : movieGenres
+    const singleGenre = genreCollection.find(el => el.id === +genre)
+    console.log(genre,genreCollection,singleGenre)
+    return mediaApi.getMediaByGenre({ mediaType, genreId: singleGenre.id ,page})
 }
