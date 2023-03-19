@@ -1,22 +1,22 @@
 import { Box, Flex, Image, Text } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { genres } from '../utils/genreDb'
+import { tvGenres,movieGenres } from '../utils/genreDb'
 import movieCss from './styles/movie.module.css'
-
+import defaultPoster from '../utils/defaultPoster.png'
 const MediaCard = ({ data ,genreFontSize,titleFontSize,dateFontSize,titleLength}) => {
     return (
   <>
         {data && <Link to={`/detail/${data.release_date ? 'movie' : 'tv'}/${data.id}`}>
           <Box color='white' pos='relative' className={movieCss.MovieCard} fontFamily='bebas'>
-          <Image src={`https://image.tmdb.org/t/p/w300${data.poster_path}`} alt={data.title} />
+          <Image src={data.poster_path?`https://image.tmdb.org/t/p/w300${data.poster_path}`:defaultPoster} alt={data.title} />
           <Box className={movieCss.details} pos='absolute' top='0'  h='100%' w='100%'>
               <Flex justifyContent={'flex-end'} h='inherit' direction={'column'} p='.2rem ' gap='.3rem'>
                 
                 <Flex alignItems='center' justifyContent={'space-between'}>
                     <Text textTransform={'uppercase'} border='1px solid rgba(255, 250, 250, 0.4)'  w={'fit-content'} fontSize={genreFontSize || 'xs'} px='.5rem' borderRadius={'1px'} color='rgb(243, 236, 236)'>
-{
-                        genres.filter((el)=>el.id===(data?.genre_ids?.length > 0  ? data?.genre_ids[0]:'')).map((el)=>el.name)
+                    {
+                        data.release_date?movieGenres.filter((el)=>el.id===(data?.genre_ids?.length > 0  ? data?.genre_ids[0]:'')).map((el)=>el.name):tvGenres.filter((el)=>el.id===(data?.genre_ids?.length > 0  ? data?.genre_ids[0]:'')).map((el)=>el.name)
                         
                     }
                     </Text>

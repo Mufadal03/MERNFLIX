@@ -7,9 +7,9 @@ const PlayTrailer = ({ isOpen, onClose, videos }) => {
   const [videoIndex, setVideoIndex] = useState(0)
   useEffect(() => {
       console.log(videos)
-      let video = videos?.filter((el) => el.type === 'Trailer'||el.type==='Teaser')
+      let video = videos?.filter((el) => el.type === 'Trailer')
       if(video?.length===0)video = videos?.filter((el) => el.type === 'Clip')
-      
+      console.log('filtered video',video)
         setTrailer(video)
     }, [videos])
   const opts = {
@@ -24,7 +24,12 @@ const PlayTrailer = ({ isOpen, onClose, videos }) => {
         console.log(e)
     }
   const onErrorFn = (e) => {
-    if(videoIndex<trailer.length)setVideoIndex((prev)=>prev+1)
+    if (videoIndex < trailer.length) setVideoIndex((prev) => prev + 1)
+    else if (videoIndex >= trailer.length) {
+      const teasers = videos?.filter((el) => el.type === 'Teaser')
+      setTrailer(teasers)
+      setVideoIndex(0)
+    }
     else console.log('error')
   }
   const onEndFn = (e) => {

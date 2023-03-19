@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useParams, useSearchParams } from 'react-rout
 import mediaApi from '../api/modules/media.api'
 import tmdbConfig from '../api/tmdb/tmdb.config'
 import { generateUrl } from '../utils/genrateUrl'
-import { genres } from '../utils/genreDb'
+import { tvGenres,movieGenres } from '../utils/genreDb'
 import HeroLoading from './Loaders/HeroLoading'
 import { AiFillCaretRight,AiOutlineInfoCircle } from 'react-icons/ai'
 import GenreTypeCard from './GenreTypeCard'
@@ -16,7 +16,7 @@ const Hero = () => {
   const { mediaType } = useParams()
   const [seachParams] = useSearchParams()
   const location = useLocation()
-  const category = seachParams.get('category')
+  const genre = seachParams.get('genre')
   const navigate = useNavigate()
   const page = 1
   useEffect(() => {
@@ -25,7 +25,7 @@ const Hero = () => {
         setLoading(true)
         const medias = ['tv', 'movie']
         const customMediaType = medias[Math.floor(Math.random() * 2)]
-        const response = await (location.pathname === '/' ? mediaApi.getTrendingList({ mediaType: customMediaType, timeWindow: 'day' }) : generateUrl(category, mediaApi, page, genres, mediaType))
+        const response = await (location.pathname === '/' ? mediaApi.getTrendingList({ mediaType: customMediaType, timeWindow: 'day' }) : generateUrl(genre, mediaApi, page, tvGenres,movieGenres, mediaType))
         const index = Math.floor(Math.random() * 4)
         const details = await mediaApi.getDetail({ mediaType: mediaType || customMediaType, mediaId: response.results[index].id })
         setData({

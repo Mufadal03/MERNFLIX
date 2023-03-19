@@ -1,32 +1,33 @@
 
-import { Box, Button, Flex, Grid, GridItem } from '@chakra-ui/react'
+import { Box, Button, Flex, Grid, GridItem, Text } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import mediaApi from '../api/modules/media.api'
 import { generateUrl } from '../utils/genrateUrl'
-import { genres } from '../utils/genreDb'
+import { tvGenres,movieGenres } from '../utils/genreDb'
+import Category from './Category'
 import LoadMore from './LoadMore'
 import MediaCard from './MediaCard'
-import MovieCard from './MediaCard'
 
 const MediaCollection = () => {
-    const [searchParams] = useSearchParams()
-    const category = searchParams.get('category')
+    const [searchParams,setSearchParams] = useSearchParams()
     const [totalPage,setTotalPage] = useState(null)
     const [media,setMedia]=useState([])
     const { mediaType } = useParams()
     const [page,setPage] = useState(1)
-
+    const [genre,setGenre] = useState(searchParams.get('genre'))
   useEffect(() => {
       window.scrollTo(0, 0);
       setPage(1)
+      setGenre('trending')
+      setMedia([])
   }, [mediaType])
     
     useEffect(() => {
         console.log(page)
         const fetchMedia = async () => {
             try {
-                const response = await generateUrl(category, mediaApi, page, genres, mediaType)
+                const response = await generateUrl(genre, mediaApi, page, tvGenres,movieGenres, mediaType)
                 console.log(response)
                 setTotalPage(response.total_pages)
                 if (page === 1) setMedia(response.results)
@@ -36,14 +37,24 @@ const MediaCollection = () => {
             }
         }
         fetchMedia()
-    }, [mediaType, page])
+    }, [mediaType, page,genre])
     
+    useEffect(() => {
+        setSearchParams({
+            genre
+        })
+    },[genre])
     const loadMore = () => {
         setPage(prev => prev + 1)
         console.log('total pages',totalPage)
     }
+    console.log('updating category',genre)
   return (
       <Box>
+          <Flex w={'95%'} m='auto' alignItems={'center'} fontFamily='bebas' gap='.5rem' justifyContent={'flex-end'} my='1rem'>
+              <Text>Category</Text>
+              <Category mediaType={mediaType} value={genre} setCategory={setGenre } />
+          </Flex>
           <Grid w='95vw' py='2rem' m='auto' gridTemplateColumns={{base:'repeat(2,1fr)',sm:'repeat(3,1fr)',md:'repeat(4,1fr)',lg:'repeat(5,1fr)'}} gap='.5rem'>
               {
                   media?.length > 0 && media?.map((el,i) => {
