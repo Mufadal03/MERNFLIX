@@ -1,5 +1,6 @@
-export const generateUrl = (genre, mediaApi, page, tvGenres,movieGenres, mediaType) => {
-    if (!genre) {
+export const generateUrl = (genre, mediaApi, page, tvGenres, movieGenres, mediaType) => {
+    console.log(genre)
+    if (genre===null) {
         return mediaApi.getTrendingList({ mediaType, timeWindow: 'day', page })
     }
     if (genre === 'popular' || genre === 'top_rated') {
@@ -10,6 +11,5 @@ export const generateUrl = (genre, mediaApi, page, tvGenres,movieGenres, mediaTy
     }
     const genreCollection = mediaType === 'tv' ? tvGenres : movieGenres
     const singleGenre = genreCollection.find(el => el.id === +genre)
-    console.log(genre,genreCollection,singleGenre)
     return mediaApi.getMediaByGenre({ mediaType, genreId: singleGenre.id ,page})
 }
