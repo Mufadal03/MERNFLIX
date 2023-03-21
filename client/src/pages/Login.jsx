@@ -1,13 +1,13 @@
 import { Box, Button, Flex, HStack, Image, Input, Text, useToast, VStack } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { json, Link, useNavigate } from 'react-router-dom'
-import mediaApi from '../api/modules/media.api'
-import { userApi } from '../api/modules/user.api'
-import publicAxios from '../axios/publicAxios'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { logIn } from '../redux/actions'
 import bg from '../utils/bg.jpg'
 const Login = () => {
   const toast = useToast()
-  const navigate=useNavigate()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [userDetails, setuserDetails] = useState({
     email: '',
     password:''
@@ -20,31 +20,32 @@ const Login = () => {
     })
   }
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
+    console.log('clicked')
     const { email, password } = userDetails
     if (email === '', password == '') return
     try {
-      const data = await userApi.login(userDetails)
-      console.log(data)
+      const res = await dispatch(logIn(userDetails))
       toast({
-        title: data.response,
+        title: res.response,
         position: 'top',
-        status: data.success ? "success" : "error",
         duration: 3000,
-        isClosable:true
+        isClosable: true,
+        status:'success'
       })
-      
-      if (data.success) {
-        localStorage.setItem('isAuth',JSON.stringify(true))
-        localStorage.setItem('mernflixToken', JSON.stringify(data.token))
-        navigate('/')
-      }
+      navigate('/')
     } catch (error) {
-      console.log(error)
+      toast({
+        title: error.message,
+        position: 'top',
+        duration: 3000,
+        isClosable: true,
+        status:'error'
+      })
     }
   }
   return (
-    <Box minH='100vh' bgImage={`url(${bg})`} >
+    <Box minH='100vh' bgImage={`url(${bg})`} fontFamily='bebas'>
       <Flex h={'100vh'} justifyContent='center' alignItems={'center'}>
         <Flex w='500px' h={''} alignItems='center'  bgColor={'rgba(1,1,1,0.9)'} direction='column' p='2rem' gap='2rem' borderRadius={'lg'}>
           <Image src='https://fontmeme.com/permalink/230305/45fcbc47916afa4eed29a10ff819946b.png' alt='Logo' />
