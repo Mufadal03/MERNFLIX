@@ -32,13 +32,13 @@ const tmdbEndpoints = {
     personMedias: ({ personId }) => generate_url(`person/${personId}/combined_credits`),
 
     // PLATFROM WHERE WE CAN WATCH
-    mediaWatchProvider: ({ mediaType, mediaId }) => generate_url(`${mediaType}/${mediaId}/watch/provider`),
+    mediaWatchProvider: ({ mediaType, mediaId }) => generate_url(`${mediaType}/${mediaId}/watch/providers`),
     
     // TRENDING 
-    trendingList:({mediaType,timeWindow})=>generate_url(`/trending/${mediaType}/${timeWindow}`),
+    trendingList:({mediaType,timeWindow,page})=>generate_url(`/trending/${mediaType}/${timeWindow}`,{page}),
 
     //GET SPECIFIC GENRE TYPE MEDIA EG:TV/ACTION MOVIE/FANTASY 
-    mediaByGenre: ({ mediaType, with_genres }) => generate_url(`/discover/${mediaType}`, { with_genres }),
+    mediaByGenre: ({ mediaType, with_genres,page }) => generate_url(`discover/${mediaType}`, { with_genres ,page}),
    
     //YOU MAY ALSO LIKE
     similarMedia:({mediaType,mediaId})=>generate_url(`/${mediaType}/${mediaId}/similar`)
