@@ -50,7 +50,6 @@ const userInfo = async(req,res) => {
     const { userId } = req.body 
     try {
         const user = await userModel.findById({ '_id': userId })
-        console.log(user)
         const response = {}
         response.username=user.username
         res.status(200).send(response)
