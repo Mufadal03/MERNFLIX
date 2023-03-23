@@ -5,13 +5,14 @@ const mediaEndpoints = {
 
     detail: ({ mediaType, mediaId }) => `media/detail/${mediaType}/${mediaId}`,
 
-    search: ({ type, query, page }) => `media/find/?type=${type}&query=${query}&page=${page}`,
+    search: ({ mediaType, query, page }) => `media/search/${mediaType}?&query=${query}&page=${page}`,
 
     getGenre: ({ type }) => `media/genre?type=${type}`,
 
     getTrendingList: ({ mediaType, timeWindow,page=1 }) => `/media/trending/${mediaType}/${timeWindow}?page=${page}`,
 
-    getMediaByGenre:({mediaType,genreId})=>`/media/discover/${mediaType}?with_genres=${genreId}`
+    getMediaByGenre: ({ mediaType, genreId, page = 1 }) => `/media/discover/${mediaType}?with_genres=${genreId}&page=${page}`,
+    
 }
 
 const mediaApi = {
@@ -33,9 +34,9 @@ const mediaApi = {
         }
     },
 
-    getSearch: async ({ type, query, page }) => {
+    getSearch: async ({ mediaType, query, page }) => {
         try {
-            const response = await publicAxios.get(mediaEndpoints.search({ type, query, page }))
+            const response = await publicAxios.get(mediaEndpoints.search({ mediaType, query, page }))
             return response
         } catch (error) {
             return error
@@ -60,9 +61,10 @@ const mediaApi = {
         }
     },
 
-    getMediaByGenre: async ({ mediaType, genreId }) => {
+    getMediaByGenre: async ({ mediaType, genreId, page }) => {
+        // console.log(mediaEndpoints.getMediaByGenre({ mediaType, genreId, page }))
         try {
-            const response = await publicAxios.get(mediaEndpoints.getMediaByGenre({ mediaType, genreId }))
+            const response = await publicAxios.get(mediaEndpoints.getMediaByGenre({ mediaType, genreId,page }))
             return response
         } catch (error) {
             return error
