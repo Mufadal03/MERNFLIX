@@ -8,11 +8,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
 import { Link } from 'react-router-dom';
 import RowLoading from './Loaders/RowLoading';
-
+import './styles/slides.css'
 const GenreRow = ({ title, api ,to}) => {
     const [data, setData] = useState([])
-    const [loading,setLoading] = useState(false)
-    
+    const [loading, setLoading] = useState(false)
     useEffect(() => {
         setLoading(true)
         api.then((res) => {
@@ -20,14 +19,12 @@ const GenreRow = ({ title, api ,to}) => {
             setLoading(false)
         }).catch((err)=>console.log(err))
     }, [api])
-
-    
-    
+  
   return (
       <Box>
           <Flex justifyContent={'space-between'} py='.5rem' fontFamily={'bebas'}>
               <Text textTransform={'capitalize'} fontSize={{base:'sm',md:'sm',lg:'md'}}>{title}</Text>
-              <Link to={to }><Text mr='1rem' fontSize={{base:'sm',md:'sm',lg:'md'}}>Explore all</Text></Link>
+              <Text mr='1rem' fontSize={{ base: 'sm', md: 'sm', lg: 'md' }} ><Link to={ to} state={{from :'home'}}> Explore all</Link></Text>
           </Flex>
           {
               loading?<RowLoading />: <Swiper

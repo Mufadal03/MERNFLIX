@@ -6,10 +6,8 @@ const PlayTrailer = ({ isOpen, onClose, videos }) => {
   const [trailer, setTrailer] = useState()
   const [videoIndex, setVideoIndex] = useState(0)
   useEffect(() => {
-      console.log(videos)
       let video = videos?.filter((el) => el.type === 'Trailer')
       if(video?.length===0)video = videos?.filter((el) => el.type === 'Clip')
-      console.log('filtered video',video)
         setTrailer(video)
     }, [videos])
   const opts = {
@@ -41,7 +39,7 @@ const PlayTrailer = ({ isOpen, onClose, videos }) => {
 
       <Modal className='modal' isCentered isOpen={isOpen} onClose={onClose} size='full' border='2px solid red'h='100vh' >
         <ModalOverlay backdropFilter='blur(10px)' />
-        <ModalContent bgColor={'transparent'} h='100vh'  color='white'>
+        <ModalContent bgColor={'transparent'} h='100vh' color='white'>
             {/* <ModalHeader><Text className='test'>trailer</Text></ModalHeader> */}
           <ModalCloseButton />
           <ModalBody>

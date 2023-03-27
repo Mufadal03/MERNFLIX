@@ -1,5 +1,5 @@
-import { Box, Button, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react'
-import React, { useEffect, useRef, useState } from 'react'
+import { Button, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import mediaApi from '../api/modules/media.api'
 import tmdbConfig from '../api/tmdb/tmdb.config'
@@ -19,9 +19,8 @@ const Hero = () => {
   const genre = seachParams.get('genre')
   const navigate = useNavigate()
   const page = 1
-  useEffect(() => {
-    const FetchMedia = async () => {
-      try {
+   const FetchMedia = async () => {
+     try {
         setLoading(true)
         const medias = ['tv', 'movie']
         const customMediaType = medias[Math.floor(Math.random() * 2)]
@@ -48,8 +47,10 @@ const Hero = () => {
         console.log('show error on toast',error)
       }
     }
-    FetchMedia()
-  }, [mediaType, location, seachParams, page])
+    useEffect(() => {
+      if(location.pathname==='/')FetchMedia()
+      else if(genre) FetchMedia()
+  }, [genre,location.pathname])
   if (loading) return <HeroLoading />
     return (
       <Flex h='100vh' justifyContent={'center'} fontFamily='bebas' >

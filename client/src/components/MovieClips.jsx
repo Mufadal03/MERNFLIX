@@ -12,7 +12,6 @@ const MovieClips = ({ data }) => {
     useEffect(() => {
         let DB = data?.filter(el=>el.type!=='Trailer')
         setClips(DB)
-        console.log(DB)
     }, [data])
     if(clips?.length<=0)return 
     const onVideoEnd = (e) => {

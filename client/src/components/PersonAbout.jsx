@@ -19,14 +19,14 @@ const PersonAbout = () => {
         getDetails()
     },[personId])
   return (
-      <Flex  m={'4rem auto'} border='1px solid rgba(115, 114, 114, 0.5)' w='100%' p={'1rem'} borderRadius='base'> 
+      <Flex  m={'4rem auto'} border='1px solid rgba(115, 114, 114, 0.5)'  w='100%' p={'1rem'} borderRadius='base' > 
           <Box w='25%'bgImage={`url(${tmdbConfig.posterImgUrl(data?.profile_path)})`} h='500px' bgPos={'center'} bgSize='contain' bgRepeat={'no-repeat'} >
               {/* image */}
           </Box>
-          <Flex w='75%' direction='column' gap='.5rem' p='1rem' >
+          <Flex w='75%' direction='column' gap='.5rem' p='1rem' fontFamily={'bebas'}>
               {/* details */}
-              <Heading>{data?.name}</Heading>
-              <Text fontSize={'md'}>{data?.biography }</Text>
+              <Heading fontSize={'4xl'} fontFamily='bebas'>{data?.name}</Heading>
+              <Text fontSize={'sm'} fontWeight='300'>{data?.biography }</Text>
           </Flex>
     </Flex>
   )

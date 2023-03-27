@@ -1,7 +1,7 @@
 
 import { Box, Button, Flex, Grid, GridItem, Text } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useLocation, useParams, useSearchParams } from 'react-router-dom'
 import mediaApi from '../api/modules/media.api'
 import { generateUrl } from '../utils/genrateUrl'
 import { tvGenres,movieGenres } from '../utils/genreDb'
@@ -14,21 +14,22 @@ const MediaCollection = () => {
     const [totalPage,setTotalPage] = useState(null)
     const [media,setMedia]=useState([])
     const { mediaType } = useParams()
-    const [page,setPage] = useState(1)
-    const [genre,setGenre] = useState(searchParams.get('genre'))
+    const [page, setPage] = useState(1)
+    const  location  = useLocation()
+    const [genre, setGenre] = useState(searchParams.get('genre') || 'trending')
+    
   useEffect(() => {
       window.scrollTo(0, 0);
+      if(location.state===null)setGenre('trending')
       setPage(1)
-      setGenre('trending')
       setMedia([])
-  }, [mediaType])
+  }, [location.pathname])
     
-    useEffect(() => {
-        console.log(page)
-        const fetchMedia = async () => {
-            try {
+    
+    const fetchMedia = async () => {
+        try {
                 const response = await generateUrl(genre, mediaApi, page, tvGenres,movieGenres, mediaType)
-                console.log(response)
+                // console.log(response)
                 setTotalPage(response.total_pages)
                 if (page === 1) setMedia(response.results)
                 else setMedia(prev=>[...prev,...response.results])
@@ -36,6 +37,7 @@ const MediaCollection = () => {
                 console.log(error)
             }
         }
+    useEffect(() => {
         fetchMedia()
     }, [mediaType, page,genre])
     
@@ -43,12 +45,11 @@ const MediaCollection = () => {
         setSearchParams({
             genre
         })
-    },[genre])
+    }, [genre,mediaType])
+    
     const loadMore = () => {
         setPage(prev => prev + 1)
-        console.log('total pages',totalPage)
     }
-    console.log('updating category',genre)
   return (
       <Box>
           <Flex w={'95%'} m='auto' alignItems={'center'} fontFamily='bebas' gap='.5rem' justifyContent={'flex-end'} my='1rem'>

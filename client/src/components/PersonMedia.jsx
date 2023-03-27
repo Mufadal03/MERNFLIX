@@ -49,7 +49,7 @@ const PersonMedia = () => {
           data?.length > 0 && data?.map((media,i) => {
             return (
               <GridItem key={i}>
-                <MovieCard data={media} />
+                <MovieCard titleFontSize={'xl'} titleLength={35} dateFontSize={'lg'} genreFontSize={'lg'}data={media} />
               </GridItem>
             )
           })
