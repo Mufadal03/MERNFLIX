@@ -23,11 +23,12 @@ const MediaSearch = () => {
   }
 
   const getSearch = async(query) => {
-    if (query.length === 0) return
+    if (query.length === 0) {
+      setData([])
+      return
+    }
     try {
       const response = await mediaApi.getSearch({ mediaType: category, query: searchQuery, page })
-      console.log(query)
-      console.log(response)
       const latest_result = category==='person'?response.results:response.results.sort((a, b) => getReleaseDate(b) - getReleaseDate(a))
       setTotalPages(response.total_pages)
       page>1?setData((prev)=>[...prev,...latest_result]):setData(latest_result)
@@ -40,14 +41,14 @@ const MediaSearch = () => {
       getSearch(searchQuery)
     },500)
     return ()=>clearTimeout(debounce)
-  }, [searchQuery,page])
+  }, [searchQuery,page,category])
   
   useEffect(() => {
     setPage(1)
   },[category])
 
   return (
-      <Box minH='100vh' bgColor={'black'} color='white'>
+      <Box minH='100vh' bgColor={'black'} color='white' fontFamily={'bebas'}>
           <Flex  pt='70px' w='90vw' m='auto' gap='1rem' alignItems={'center'}>
             <Input onChange={(e)=>setSearchQuery(e.target.value)} value={searchQuery} ref={inputRef} type={'search'} w='90%' placeholder={`Type to search for ${category}`} borderRadius={'base'} size='lg'/>
             <Select onChange={(e)=>setCategory(e.target.value)} w='content-fit' color={'white'} fontSize='lg' size={'lg'} textTransform={'capitalize'}>
@@ -71,7 +72,7 @@ const MediaSearch = () => {
           })
         }
       </Grid>
-     { totalPages && page<totalPages && <LoadMore onClick={()=>setPage(prev=>prev+1)}/>}
+     { data.length>0 && totalPages && page<totalPages && <LoadMore onClick={()=>setPage(prev=>prev+1)}/>}
     </Box>
   )
 }

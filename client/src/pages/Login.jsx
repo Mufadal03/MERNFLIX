@@ -1,13 +1,15 @@
 import { Box, Button, Flex, HStack, Image, Input, Text, useToast, VStack } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { logIn } from '../redux/actions'
 import bg from '../utils/bg.jpg'
 const Login = () => {
   const toast = useToast()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const location = useLocation()
+  const comingFrom = location?.state?.from?.pathname || '/'
   const [userDetails, setuserDetails] = useState({
     email: '',
     password:''
@@ -33,7 +35,7 @@ const Login = () => {
         isClosable: true,
         status:'success'
       })
-      navigate('/')
+      navigate(comingFrom)
     } catch (error) {
       toast({
         title: error.message,
