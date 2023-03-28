@@ -1,5 +1,4 @@
 export const generateUrl = (genre, mediaApi, page, tvGenres, movieGenres, mediaType) => {
-    console.log(genre)
     if (genre===null) {
         return mediaApi.getTrendingList({ mediaType, timeWindow: 'day', page })
     }
