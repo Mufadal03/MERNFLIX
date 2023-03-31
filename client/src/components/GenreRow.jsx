@@ -15,7 +15,8 @@ const GenreRow = ({ title, api ,to}) => {
     useEffect(() => {
         setLoading(true)
         api.then((res) => {
-            setData([...res.results])
+            let medias = res?.results ? res.results : res
+            setData(medias)
             setLoading(false)
         }).catch((err)=>console.log(err))
     }, [api])

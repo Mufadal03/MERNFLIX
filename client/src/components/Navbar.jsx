@@ -84,7 +84,7 @@ const Navbar = () => {
               <Text fontSize={'sm'}><NavLink style={({isActive})=>isActive?activeStyle:{padding:'5px'}} to='/search'>Search</NavLink></Text>
                   {
                       isAuth ?<Menu >
-                                <MenuButton p='5px 20px' borderRadius={'base'} border='1px solid red'>
+                                <MenuButton p='5px 20px' borderRadius={'base'} border='1px solid rgba(115, 114, 114, 0.5)'>
                                     <Text fontSize={'sm'}>{username}</Text>
                                 </MenuButton>
                                 <MenuList style={{backgroundColor:'rgba(19, 19, 19,0.4)',textTransform:'capitalize'}} border='1px solid rgba(1,1,1,.5)'>

@@ -1,11 +1,17 @@
 import {Flex } from '@chakra-ui/react'
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { favouriteApi } from '../api/modules/favourite.api'
 import mediaApi from '../api/modules/media.api'
 import GenreRow from './GenreRow'
 
 const Genre = () => {
+  const isAuth = useSelector(state=>state.isAuth)
   return (
-    <Flex direction={'column'} h='-webkit-fit-content' gap='1rem' pl={{base:'.5rem',md:'1rem',lg:'2rem'}} >
+    <Flex direction={'column'} h='-webkit-fit-content' gap='1rem' pl={{ base: '.5rem', md: '1rem', lg: '2rem' }} >
+      {
+        isAuth && <GenreRow title='My Favourites' api={favouriteApi.getFav()} to='/favourites' />
+      }
           <GenreRow title={'trending movies'} api={mediaApi.getTrendingList({ mediaType: 'movie', timeWindow: 'day', page: 1 })} to='/media/movie?genre=trending'/>
           <GenreRow title={'trending Tv shows'} api={mediaApi.getTrendingList({mediaType:'tv',timeWindow:'day'}) } to='/media/tv?genre=trending' />
           <GenreRow title={'popular movies' } api={mediaApi.getList({mediaType:'movie',mediaCategory:'popular',page:1})} to='/media/movie?genre=popular' />
