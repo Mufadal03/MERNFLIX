@@ -1,3 +1,4 @@
+const { reviewModel } = require('../model/review.model')
 const { tmdbApi } = require('../tmdb/tmdb.api')
 
 const getList = async(req, res) => {
@@ -29,7 +30,7 @@ const getDetail = async (req, res) => {
        media.similar = similar.results
        media.images = await tmdbApi.mediaImages(payload)
        media.watchProvider = await tmdbApi.mediaWatchProvider(payload)
-      
+       media.reviews = await reviewModel.find({mediaId,mediaType}).populate('author')
        res.status(200).send(media)
    } catch (error) {
        console.log(error)
