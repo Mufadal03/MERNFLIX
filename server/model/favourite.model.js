@@ -25,7 +25,7 @@ const favouriteSchema = mongoose.Schema({
         type:String
     }
 
-}, { timestamps: true })
+}, { timestamps: true, versionKey: false, })
 
 const favouriteModel = mongoose.model('favourite', favouriteSchema)
 
