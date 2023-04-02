@@ -1,8 +1,8 @@
 import { Box, Flex, Heading, Text } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import PersonApi from '../api/modules/person.api'
-import tmdbConfig from '../api/tmdb/tmdb.config'
+import PersonApi from '../../api/modules/person.api'
+import tmdbConfig from '../../api/tmdb/tmdb.config'
 
 const PersonAbout = () => {
     const {personId} = useParams()

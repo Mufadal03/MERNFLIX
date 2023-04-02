@@ -5,8 +5,8 @@ import { Navigation, Scrollbar, A11y } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
-import tmdbConfig from '../api/tmdb/tmdb.config';
-import './styles/slides.css'
+import tmdbConfig from '../../api/tmdb/tmdb.config';
+import '.././styles/slides.css'
 const Backdrops = ({ data }) => {
     return (
             <Box w='90vw' m='auto'>

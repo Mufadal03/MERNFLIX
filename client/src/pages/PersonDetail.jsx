@@ -1,7 +1,7 @@
 import { Box, Flex } from '@chakra-ui/react'
 import React  from 'react'
-import PersonAbout from '../components/PersonAbout'
-import PersonMedia from '../components/PersonMedia'
+import PersonAbout from '../components/PersonDetail/PersonAbout'
+import PersonMedia from '../components/PersonDetail/PersonMedia'
 
 const PersonDetail = () => {
   return (

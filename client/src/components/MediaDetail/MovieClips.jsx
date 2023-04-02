@@ -5,7 +5,7 @@ import { Navigation, Scrollbar, A11y } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
-import './styles/modal.css'
+import '.././styles/modal.css'
 import YouTube from 'react-youtube';
 const MovieClips = ({ data }) => {
     const [clips, setClips] = useState()

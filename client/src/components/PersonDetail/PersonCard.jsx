@@ -1,8 +1,8 @@
 import {  Flex, Image, Text } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import tmdbConfig from '../api/tmdb/tmdb.config'
-import defaultAvatar from '../utils/avatar.png'
+import tmdbConfig from '../../api/tmdb/tmdb.config'
+import defaultAvatar from '../../utils/avatar.png'
 const PersonCard = ({ data }) => {
   return (
       <>

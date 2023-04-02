@@ -1,9 +1,9 @@
 import { Box, Flex, Image, Text } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { tvGenres,movieGenres } from '../utils/genreDb'
-import movieCss from './styles/movie.module.css'
-import defaultPoster from '../utils/defaultPoster.png'
+import { tvGenres,movieGenres } from '../../utils/genreDb'
+import movieCss from '.././styles/movie.module.css'
+import defaultPoster from '../../utils/defaultPoster.png'
 const MediaCard = ({ data, genreFontSize, titleFontSize, dateFontSize, titleLength }) => {
     return (
   <>

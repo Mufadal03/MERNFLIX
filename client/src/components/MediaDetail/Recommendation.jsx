@@ -1,34 +1,16 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
-import MediaCard from './MediaCard'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Scrollbar, A11y } from 'swiper';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/scrollbar';
-import { Link } from 'react-router-dom';
-import RowLoading from './Loaders/RowLoading';
-import './styles/slides.css'
-const GenreRow = ({ title, api ,to}) => {
-    const [data, setData] = useState([])
-    const [loading, setLoading] = useState(false)
-    useEffect(() => {
-        setLoading(true)
-        api.then((res) => {
-            let medias = res?.results ? res.results : res
-            setData(medias)
-            setLoading(false)
-        }).catch((err)=>console.log(err))
-    }, [api])
-  
+import React from 'react'
+import { A11y, Navigation, Scrollbar } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import MediaCard from '../Common/MediaCard'
+
+const Recommendation = ({data}) => {
   return (
-      <Box>
-          <Flex justifyContent={'space-between'} py='.5rem' fontFamily={'bebas'}>
-              <Text textTransform={'capitalize'} fontSize={{base:'sm',md:'sm',lg:'md'}}>{title}</Text>
-              <Text mr='1rem' fontSize={{ base: 'sm', md: 'sm', lg: 'md' }} ><Link to={ to} state={{from :'home'}}> Explore all</Link></Text>
+      <Box w='90vw' m='auto'>
+          <Flex justifyContent={'space-between'} py='.5rem'>
+              <Text textTransform={'capitalize'} fontFamily='bebas' fontSize={{base:'sm',md:'md',lg:'lg'}}>you may also like</Text>
           </Flex>
-          {
-              loading?<RowLoading />: <Swiper
+          <Swiper
               modules={[Navigation, Scrollbar, A11y]}
               spaceBetween={10}
               slidesPerView={8}
@@ -66,9 +48,8 @@ const GenreRow = ({ title, api ,to}) => {
                   })
               }
           </Swiper>
-         }
       </Box>
   )
 }
 
-export default GenreRow
+export default Recommendation

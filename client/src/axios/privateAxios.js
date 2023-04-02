@@ -1,7 +1,5 @@
 import axios from 'axios'
-import {getToken} from '../utils/getToken'
 
-const token = getToken() || ''
 const privateAxios = axios.create({
     baseURL:"http://localhost:8080"
 })
@@ -11,7 +9,7 @@ privateAxios.interceptors.request.use((configs) => {
         ...configs,
         headers: {
             'Content-Type': 'application/json',
-            'Authorization':`Bearer ${token}`
+            'Authorization':`Bearer ${(document.cookie).split('=')[1]}`
         }
     }
 })

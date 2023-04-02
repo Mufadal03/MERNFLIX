@@ -1,21 +1,22 @@
 import { Box, CircularProgress, CircularProgressLabel, Flex, Image,Icon, Text, Button, useDisclosure, VStack, useToast } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
+import { AiOutlinePlus,AiFillHeart, AiOutlineHeart ,AiOutlinePercentage,AiFillCaretRight} from 'react-icons/ai'
+import { useDispatch, useSelector } from 'react-redux'
+import {MdOutlineReviews} from 'react-icons/md'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { addToFavourite, getFavourites, removeFavourite } from '../redux/actions'
 import mediaApi from '../api/modules/media.api'
 import tmdbConfig from '../api/tmdb/tmdb.config'
-import CompanyCard from '../components/CompanyCard'
-import GenreTypeCard from '../components/GenreTypeCard'
-import { AiOutlinePlus,AiFillHeart, AiOutlineHeart ,AiOutlinePercentage,AiFillCaretRight} from 'react-icons/ai'
-import {MdOutlineReviews} from 'react-icons/md'
-import Cast from '../components/Cast'
-import PlayTrailer from '../components/PlayTrailer'
-import Backdrops from '../components/Backdrops'
-import Posters from '../components/Posters'
-import MovieClips from '../components/MovieClips'
-import Recommendation from '../components/Recommendation'
+import CompanyCard from '../components/MediaDetail/CompanyCard'
+import GenreTypeCard from '../components/Common/GenreTypeCard'
+import Cast from '../components/MediaDetail/Cast'
+import PlayTrailer from '../components/Common/PlayTrailer'
+import Backdrops from '../components/MediaDetail/Backdrops'
+import Posters from '../components/MediaDetail/Posters'
+import MovieClips from '../components/MediaDetail/MovieClips'
+import Recommendation from '../components/MediaDetail/Recommendation'
 import HeroLoading from '../components/Loaders/HeroLoading'
-import { useDispatch, useSelector } from 'react-redux'
-import { addToFavourite, getFavourites, removeFavourite } from '../redux/actions'
+import Reviews from '../components/MediaDetail/Reviews'
 const MediaDetail = () => {
   const { mediaType, mediaId } = useParams()
   const [data, setData] = useState() 
@@ -36,7 +37,6 @@ const MediaDetail = () => {
     try {
       const response = await mediaApi.getDetail({ mediaType, mediaId })
       setData(response)
-      console.log(response?.watchProvider)
       setLoading(false)
     } catch (error) {
       console.log(error)
@@ -212,8 +212,12 @@ const MediaDetail = () => {
       {data?.credits?.cast?.length > 0 && <Cast casts={data.credits.cast} />}
         {/* Cast */}
         
+        {/* Reviews */}
+        {data?.reviews && <Reviews allReviews={data?.reviews} mediaName={data?.name || data?.title} />}
+        {/* Reviews */}
+        
         {/* you may also like */}
-       { data?.recommendation?.length>0 && <Recommendation data={data?.recommendation } />}
+       { data?.recommendation?.length>0 && <Recommendation  data={data?.recommendation } />}
         {/* you may also like */}
       </Flex>
     </Box>

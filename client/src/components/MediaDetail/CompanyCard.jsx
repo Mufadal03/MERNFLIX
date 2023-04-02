@@ -1,6 +1,6 @@
-import { Box, Flex, Image, Text } from '@chakra-ui/react'
+import { Box, Flex ,Text } from '@chakra-ui/react'
 import React from 'react'
-import tmdbConfig from '../api/tmdb/tmdb.config'
+import tmdbConfig from '../../api/tmdb/tmdb.config'
 
 const CompanyCard = ({ imgUrl, name }) => {
     

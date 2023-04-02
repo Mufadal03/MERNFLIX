@@ -1,8 +1,8 @@
 import { Box } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import mediaApi from '../api/modules/media.api'
-import Genre from '../components/Genre'
-import Hero from '../components/Hero'
+import Genre from '../components/Home/Genre'
+import Hero from '../components/Common/Hero'
  
 const Home = () => {
  useEffect(() => {

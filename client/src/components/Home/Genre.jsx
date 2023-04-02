@@ -1,8 +1,8 @@
 import {Flex } from '@chakra-ui/react'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { favouriteApi } from '../api/modules/favourite.api'
-import mediaApi from '../api/modules/media.api'
+import { favouriteApi } from '../../api/modules/favourite.api'
+import mediaApi from '../../api/modules/media.api'
 import GenreRow from './GenreRow'
 
 const Genre = () => {

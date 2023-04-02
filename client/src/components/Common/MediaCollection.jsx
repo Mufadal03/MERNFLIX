@@ -1,10 +1,10 @@
 
-import { Box, Button, Flex, Grid, GridItem, Text } from '@chakra-ui/react'
+import { Box,Flex, Grid, GridItem, Text } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useLocation, useParams, useSearchParams } from 'react-router-dom'
-import mediaApi from '../api/modules/media.api'
-import { generateUrl } from '../utils/genrateUrl'
-import { tvGenres,movieGenres } from '../utils/genreDb'
+import mediaApi from '../../api/modules/media.api'
+import { generateUrl } from '../../utils/genrateUrl'
+import { tvGenres,movieGenres } from '../../utils/genreDb'
 import Category from './Category'
 import LoadMore from './LoadMore'
 import MediaCard from './MediaCard'
@@ -29,7 +29,6 @@ const MediaCollection = () => {
     const fetchMedia = async () => {
         try {
                 const response = await generateUrl(genre, mediaApi, page, tvGenres,movieGenres, mediaType)
-                // console.log(response)
                 setTotalPage(response.total_pages)
                 if (page === 1) setMedia(response.results)
                 else setMedia(prev=>[...prev,...response.results])

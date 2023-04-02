@@ -1,55 +1,11 @@
-import { Avatar, Box, Button, Flex, Heading, Text ,Icon, Textarea, Image} from '@chakra-ui/react'
+import { Avatar, Box, Button, Flex, Heading, Text ,Icon, Textarea} from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import Comment from './Comment'
-import LoadMore from './LoadMore'
+import LoadMore from '../Common/LoadMore'
 import {BiSend} from 'react-icons/bi'
 import { useSelector } from 'react-redux'
-import line from '../utils/line.svg'
-const fakeDb = [
-    {
-        id: 1,
-        username: 'MUFADAL',
-        time: '2mins ago',
-        comment:'great'
-    },
-    {
-        id: 2,
-        username: 'MUFADAL',
-        time: Date.now(),
-        comment:'great'
-    },
-    {
-        id: 3,
-        username: 'MUFADAL',
-        time: Date.now(),
-        comment:'great'
-    },
-    {
-        id: 4,
-        username: 'MUFADAL',
-        time: Date.now(),
-        comment:'great'
-    },
-    {
-        id: 5,
-        username: 'MUFADAL',
-        time: Date.now(),
-        comment:'great'
-    },
-    {
-        id: 6,
-        username: 'MUFADAL',
-        time: Date.now(),
-        comment:'great'
-    },
-    {
-        id: 7,
-        username: 'MUFADAL',
-        time: Date.now(),
-        comment:'great'
-    },
-]
-const Reviews = ({mediaName}) => {
+
+const Reviews = ({mediaName,allReviews}) => {
     const { isAuth, username } = useSelector(state => {
         return {
             isAuth: state.isAuth,
@@ -57,7 +13,7 @@ const Reviews = ({mediaName}) => {
         }
     })
     const [userReview,setUserReview] = useState('')
-    const [reviewsDb,setReviewDb] = useState(fakeDb)
+    const [reviewsDb,setReviewDb] = useState(allReviews)
     const [reviews, setReviews] = useState([])
     const [page,setPage] = useState(1)
     const skip = 3

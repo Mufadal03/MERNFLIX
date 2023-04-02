@@ -1,9 +1,9 @@
 import { Box, Flex, Grid, GridItem, Input, Select } from '@chakra-ui/react'
 import React, { useEffect, useRef, useState } from 'react'
 import mediaApi from '../api/modules/media.api'
-import LoadMore from '../components/LoadMore'
-import MediaCard from '../components/MediaCard'
-import PersonCard from '../components/PersonCard'
+import LoadMore from '../components/Common/LoadMore'
+import MediaCard from '../components/Common/MediaCard'
+import PersonCard from '../components/PersonDetail/PersonCard'
 const searchCategory = ['movie','tv','person']
 const MediaSearch = () => {
   const [category, setCategory] = useState(searchCategory[0])

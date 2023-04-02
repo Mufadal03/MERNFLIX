@@ -1,7 +1,7 @@
 import { Box, Grid, GridItem ,Heading,Icon} from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import MediaCard from '../components/MediaCard'
+import MediaCard from '../components/Common/MediaCard'
 import { getFavourites, removeFavourite } from '../redux/actions'
 import { RxCross2 } from 'react-icons/rx'
 import mediaCss from '../components/styles/movie.module.css'

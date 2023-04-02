@@ -1,9 +1,9 @@
-import { Box, Button, Flex, Grid, GridItem } from '@chakra-ui/react'
+import { Box, Grid, GridItem } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import PersonApi from '../api/modules/person.api'
-import LoadMore from './LoadMore'
-import MovieCard from './MediaCard'
+import PersonApi from '../../api/modules/person.api'
+import LoadMore from '../Common/LoadMore'
+import MovieCard from '../Common/MediaCard'
 
 const PersonMedia = () => {
   const { personId } = useParams()

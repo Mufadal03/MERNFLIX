@@ -1,6 +1,6 @@
 import { Select } from '@chakra-ui/react'
 import React from 'react'
-import { movieGenres,tvGenres } from '../utils/genreDb'
+import { movieGenres,tvGenres } from '../../utils/genreDb'
 
 
 const Category = ({ mediaType,value, setCategory }) => {

@@ -5,7 +5,7 @@ import { Navigation, Scrollbar, A11y } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/scrollbar';
-import PersonCard from './PersonCard'
+import PersonCard from '../PersonDetail/PersonCard'
 import { useParams } from 'react-router-dom';
 
 const Cast = ({ casts }) => {

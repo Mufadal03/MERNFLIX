@@ -2,7 +2,7 @@ import React, {  useEffect, useRef } from 'react'
 import { Box, Flex, Image, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
 import { Link, NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { logout, userInfo } from '../redux/actions'
+import { logout, userInfo } from '../../redux/actions'
 
 const navOptions = [
     {

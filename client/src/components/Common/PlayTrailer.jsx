@@ -1,7 +1,7 @@
 import {  Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalOverlay } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import YouTube from 'react-youtube';
-import './styles/modal.css'
+import '.././styles/modal.css'
 const PlayTrailer = ({ isOpen, onClose, videos }) => {
   const [trailer, setTrailer] = useState()
   const [videoIndex, setVideoIndex] = useState(0)
@@ -14,7 +14,6 @@ const PlayTrailer = ({ isOpen, onClose, videos }) => {
         height: '100%',
         width: '100%',
         playerVars: {
-            // https://developers.google.com/youtube/player_parameters
             autoplay: 1,
         }
     }

@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import React from 'react'
-import Hero from '../components/Hero'
-import MediaCollection from '../components/MediaCollection'
+import Hero from '../components/Common/Hero'
+import MediaCollection from '../components/Common/MediaCollection'
 
 const MediaByGenre = () => {
   

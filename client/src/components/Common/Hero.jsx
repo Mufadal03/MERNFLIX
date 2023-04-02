@@ -1,11 +1,11 @@
 import { Button, Flex, Heading, Text, useDisclosure } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import mediaApi from '../api/modules/media.api'
-import tmdbConfig from '../api/tmdb/tmdb.config'
-import { generateUrl } from '../utils/genrateUrl'
-import { tvGenres,movieGenres } from '../utils/genreDb'
-import HeroLoading from './Loaders/HeroLoading'
+import mediaApi from '../../api/modules/media.api'
+import tmdbConfig from '../../api/tmdb/tmdb.config'
+import { generateUrl } from '../../utils/genrateUrl'
+import { tvGenres,movieGenres } from '../../utils/genreDb'
+import HeroLoading from '.././Loaders/HeroLoading'
 import { AiFillCaretRight,AiOutlineInfoCircle } from 'react-icons/ai'
 import GenreTypeCard from './GenreTypeCard'
 import PlayTrailer from './PlayTrailer'
@@ -21,12 +21,19 @@ const Hero = () => {
   const page = 1
    const FetchMedia = async () => {
      try {
-        setLoading(true)
+       setLoading(true)
+       console.time('starts fetching')
         const medias = ['tv', 'movie']
-        const customMediaType = medias[Math.floor(Math.random() * 2)]
-        const response = await (location.pathname === '/' ? mediaApi.getTrendingList({ mediaType: customMediaType, timeWindow: 'day' }) : generateUrl(genre, mediaApi, page, tvGenres,movieGenres, mediaType))
-        const index = Math.floor(Math.random() * 4)
-        const details = await mediaApi.getDetail({ mediaType: mediaType || customMediaType, mediaId: response.results[index].id })
+       const customMediaType = medias[Math.floor(Math.random() * 2)]
+       console.time('fetching trendings')
+       const response = await (location.pathname === '/' ? mediaApi.getTrendingList({ mediaType: customMediaType, timeWindow: 'day' }) : generateUrl(genre, mediaApi, page, tvGenres, movieGenres, mediaType))
+       console.timeEnd('fetching trendings')
+       const index = Math.floor(Math.random() * 4)
+       console.time('fetching hero')
+       const details = await mediaApi.getDetail({ mediaType: mediaType || customMediaType, mediaId: response.results[index].id })
+       console.timeEnd('fetching hero')
+
+       console.timeEnd('starts fetching')
         setData({
           id: details.id,
           mediaType:details.release_date?"movie":'tv',
@@ -37,7 +44,6 @@ const Hero = () => {
           release_date:details.release_date || details.first_air_date,
           title: details.title || details.name,
           tagline:details.tagline,
-          rating: details.vote_average,
           video: details.video.results,
           language: details.spoken_languages[0].english_name,
           poster:details.poster_path
