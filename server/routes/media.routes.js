@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { getList, getDetail, getSearch, getGenre, getTrendingList, getMediaByGenre} = require('../controller/media.contorller')
+const { getList, getDetail, getSearch, getGenre, getTrendingList, getMediaByGenre, getHero} = require('../controller/media.contorller')
 mediaRoutes = Router()
 mediaRoutes.get('/search/:mediaType', getSearch)
 
@@ -12,5 +12,7 @@ mediaRoutes.get('/detail/:mediaType/:mediaId', getDetail)
 mediaRoutes.get('/genre', getGenre)
 
 mediaRoutes.get('/trending/:mediaType/:timeWindow', getTrendingList)
+
+mediaRoutes.get('/hero',getHero)
 
 module.exports={mediaRoutes}
