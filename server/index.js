@@ -5,7 +5,10 @@ const {connection} =  require('./config/db')
 const { mediaRoutes } = require('./routes/media.routes')
 const { personRoutes } = require('./routes/person.routes')
 const { userRoutes } = require('./routes/user.routes')
+const { favouriteRoutes } = require('./routes/favourite.routes')
 const cookieParser = require('cookie-parser')
+const { authenticator } = require('./middleware/authenticator')
+const { reviewRoutes } = require('./routes/review.routes')
 require('dotenv').config()
 app.use(cookieParser());
 app.use(cors({
@@ -22,6 +25,8 @@ const PORT = process.env.PORT || 8080
 app.use('/media', mediaRoutes)
 app.use('/person', personRoutes)
 app.use('/user',userRoutes)
+app.use('/favourite',authenticator, favouriteRoutes)
+app.use('/review',reviewRoutes)
 
 app.listen(PORT, async () => {
     try { 

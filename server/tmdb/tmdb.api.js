@@ -26,7 +26,7 @@ const tmdbApi = {
 
     trendingList: async ({ mediaType, timeWindow,page }) => await getReq(tmdbEndpoints.trendingList({ mediaType, timeWindow ,page})),
     
-    medaiByGenre: async ({ mediaType, with_genres,page }) => await getReq(tmdbEndpoints.mediaByGenre({ mediaType, with_genres,page })),
+    mediaByGenre: async ({ mediaType, with_genres,page }) => await getReq(tmdbEndpoints.mediaByGenre({ mediaType, with_genres,page })),
     
     similarMedia:async({mediaType,mediaId})=>await getReq(tmdbEndpoints.similarMedia({mediaType,mediaId}))
 }
