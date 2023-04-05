@@ -2,7 +2,6 @@ import * as data from './actionTypes'
 import { userApi } from '../api/modules/user.api'
 import { favouriteApi } from '../api/modules/favourite.api'
 
-
 export const signUp = (payload) => async dispatch => {
     dispatch({type:data.SIGNUP_REQUEST})
     try {

@@ -25,6 +25,11 @@ const MediaCollection = () => {
       setMedia([])
   }, [location.pathname])
     
+  useEffect(() => {
+      setSearchParams({
+          genre
+      })
+  }, [genre,mediaType])
     
     const fetchMedia = async () => {
         try {
@@ -40,11 +45,6 @@ const MediaCollection = () => {
         fetchMedia()
     }, [mediaType, page,genre])
     
-    useEffect(() => {
-        setSearchParams({
-            genre
-        })
-    }, [genre,mediaType])
     
     const loadMore = () => {
         setPage(prev => prev + 1)

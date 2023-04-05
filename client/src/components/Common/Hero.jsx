@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import mediaApi from '../../api/modules/media.api'
 import tmdbConfig from '../../api/tmdb/tmdb.config'
-import { generateUrl } from '../../utils/genrateUrl'
-import { tvGenres,movieGenres } from '../../utils/genreDb'
 import HeroLoading from '.././Loaders/HeroLoading'
 import { AiFillCaretRight,AiOutlineInfoCircle } from 'react-icons/ai'
 import GenreTypeCard from './GenreTypeCard'
@@ -14,50 +12,44 @@ const Hero = () => {
   const [data, setData] = useState()
   const [loading, setLoading] = useState(false)
   const { mediaType } = useParams()
-  const [seachParams] = useSearchParams()
+  const [seachParams,setSearchParams] = useSearchParams()
   const location = useLocation()
   const genre = seachParams.get('genre')
+  const [category,setCategory]= useState(genre || 'trending')
   const navigate = useNavigate()
-  const page = 1
-   const FetchMedia = async () => {
-     try {
-       setLoading(true)
-       console.time('starts fetching')
-        const medias = ['tv', 'movie']
-       const customMediaType = medias[Math.floor(Math.random() * 2)]
-       console.time('fetching trendings')
-       const response = await (location.pathname === '/' ? mediaApi.getTrendingList({ mediaType: customMediaType, timeWindow: 'day' }) : generateUrl(genre, mediaApi, page, tvGenres, movieGenres, mediaType))
-       console.timeEnd('fetching trendings')
-       const index = Math.floor(Math.random() * 4)
-       console.time('fetching hero')
-       const details = await mediaApi.getDetail({ mediaType: mediaType || customMediaType, mediaId: response.results[index].id })
-       console.timeEnd('fetching hero')
 
-       console.timeEnd('starts fetching')
-        setData({
-          id: details.id,
-          mediaType:details.release_date?"movie":'tv',
-          backdrop: details.backdrop_path,
-          genres: details.genres,
-          description: details.overview,
-          runtime: details.runtime || details.episode_run_time[0],
-          release_date:details.release_date || details.first_air_date,
-          title: details.title || details.name,
-          tagline:details.tagline,
-          video: details.video.results,
-          language: details.spoken_languages[0].english_name,
-          poster:details.poster_path
-        })
+  useEffect(() => {
+    if (genre !== null) {
+      setCategory(genre)
+      console.log(genre, 'running genre changed')
+    }
+  }, [genre])
+
+  useEffect(() => {
+    setCategory('trending')
+    console.log('running mediaType changed')
+  }, [mediaType])
+ 
+  
+  useEffect(() => {
+    FetchMedia()
+    console.log('running category changed fetch')
+  }, [location.pathname, category])
+  
+   const FetchMedia = async () => {
+     try {   
+       setLoading(true)
+       console.log('fetching')
+       const {response:hero} = await mediaApi.getHero({ mediaType:mediaType?mediaType:'', genre:category })
+        setData({...hero})
         setLoading(false)
       } catch (error) {
         console.log('show error on toast',error)
       }
     }
-    useEffect(() => {
-      if(location.pathname==='/')FetchMedia()
-      else if(genre) FetchMedia()
-  }, [genre,location.pathname])
+
   if (loading) return <HeroLoading />
+
     return (
       <Flex h='100vh' justifyContent={'center'} fontFamily='bebas' >
 

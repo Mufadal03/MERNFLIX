@@ -1,9 +1,9 @@
 import { Box, CircularProgress, CircularProgressLabel, Flex, Image,Icon, Text, Button, useDisclosure, VStack, useToast } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import { AiOutlinePlus,AiFillHeart, AiOutlineHeart ,AiOutlinePercentage,AiFillCaretRight} from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import {MdOutlineReviews} from 'react-icons/md'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import {useLocation, useNavigate, useParams } from 'react-router-dom'
 import { addToFavourite, getFavourites, removeFavourite } from '../redux/actions'
 import mediaApi from '../api/modules/media.api'
 import tmdbConfig from '../api/tmdb/tmdb.config'
@@ -13,10 +13,10 @@ import Cast from '../components/MediaDetail/Cast'
 import PlayTrailer from '../components/Common/PlayTrailer'
 import Backdrops from '../components/MediaDetail/Backdrops'
 import Posters from '../components/MediaDetail/Posters'
-import MovieClips from '../components/MediaDetail/MovieClips'
 import Recommendation from '../components/MediaDetail/Recommendation'
 import HeroLoading from '../components/Loaders/HeroLoading'
 import Reviews from '../components/MediaDetail/Reviews'
+import MovieClips from '../components/MediaDetail/MovieClips'
 const MediaDetail = () => {
   const { mediaType, mediaId } = useParams()
   const [data, setData] = useState() 
@@ -26,7 +26,8 @@ const MediaDetail = () => {
   const location = useLocation()
   const dispatch = useDispatch()
   const toast = useToast()
-  const [favourite,setFavourite] = useState(false)
+  const [favourite, setFavourite] = useState(false)
+  const reviewRef = useRef()
   const { isAuth } = useSelector((state) => { 
     return {
       isAuth: state.isAuth,
@@ -93,7 +94,7 @@ const MediaDetail = () => {
       }
   }
  
-  
+
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchMedia()
@@ -159,7 +160,7 @@ const MediaDetail = () => {
                  <Flex alignItems={'center'} gap='1rem'>
                 <Icon as={AiOutlinePlus} cursor='pointer' h='10' w='10' borderRadius='full' bgColor={'rgba(115, 114, 114, 0.5)'} p='10px' />
                   <Icon as={favourite?AiFillHeart:AiOutlineHeart} color={favourite?'red':'white'} onClick={handleFavourite} cursor='pointer' h='10' w='10' borderRadius='full' bgColor={'rgba(115, 114, 114, 0.5)'} p='10px'/>
-                  <Icon as={MdOutlineReviews} cursor='pointer' h='10' w='10' borderRadius='full' bgColor={'rgba(115, 114, 114, 0.5)'} p='10px'/>
+                  <a href='#review'><Icon as={MdOutlineReviews} onClick={()=>console.log(reviewRef)} cursor='pointer' h='10' w='10' borderRadius='full' bgColor={'rgba(115, 114, 114, 0.5)'} p='10px'/></a>
                  </Flex>
               {/* icons button */}
               {/* watch trailer  button */}
@@ -198,7 +199,8 @@ const MediaDetail = () => {
       </Flex>
       <Flex direction={'column'} gap='1rem' > 
         {/* MovieClips */}
-        {data?.video?.results?.length>0 && <MovieClips data={data?.video?.results.slice(0,5) } />}
+        {/* <MovieClips data={data?.video?.results.slice(0,5) } /> */}
+        {data?.video?.results?.length>0 &&  <MovieClips data={data?.video?.results.slice(0,5) }/>}
         {/* MovieClips */}
 
       {/* backdrops */}
@@ -213,7 +215,7 @@ const MediaDetail = () => {
         {/* Cast */}
         
         {/* Reviews */}
-        {data?.reviews && <Reviews allReviews={data?.reviews} mediaName={data?.name || data?.title} />}
+        <Reviews mediaName={data?.name || data?.title} />
         {/* Reviews */}
         
         {/* you may also like */}

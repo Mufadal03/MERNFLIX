@@ -7,15 +7,3 @@
 .MovieCard:hover .details{
     display: block;
 }
-.icon{
-    visibility: hidden;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-.favouriteMedia:hover .icon{
-    visibility: visible;
-}
-.favouriteMedia{
-    position: relative;
-}

@@ -3,12 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import MediaCard from '../components/Common/MediaCard'
 import { getFavourites, removeFavourite } from '../redux/actions'
-import { RxCross2 } from 'react-icons/rx'
-import mediaCss from '../components/styles/movie.module.css'
+import {AiFillHeart} from 'react-icons/ai'
 const Favourite = () => {
     const [media,setMedia] = useState([])
-  const dispatch = useDispatch()
-  const [deleteFav,setDelete] = useState(false)
+    const dispatch = useDispatch()
     const fetchMedia = async() => {
      try {
        const response = await dispatch(getFavourites())
@@ -17,13 +15,13 @@ const Favourite = () => {
       console.log(error)
      } 
   }
-  const handleRemove = (el) => {
-    dispatch(removeFavourite(el.id))
-    setDelete(!deleteFav)
+  const handleRemove = async(el) => {
+    await dispatch(removeFavourite(el.id))
+    fetchMedia()
   }
   useEffect(() => {
       fetchMedia()
-    },[deleteFav])
+    },[])
   return (
     <Box minH='100vh' bgColor='black' color={'white'}>
       <Box w='95vw' py='3rem' m='auto'>
@@ -32,9 +30,9 @@ const Favourite = () => {
         {
           media?.length > 0 && media?.map((el) => {
               return (
-                <GridItem key={el.id} className={mediaCss.favouriteMedia} >
+                <GridItem key={el.id} pos='relative' >
                   <MediaCard titleFontSize={'xl'} titleLength={35} dateFontSize={'lg'} genreFontSize={'lg'} data={el} />
-                  <Icon className={mediaCss.icon} color='red' cursor={'pointer'} as={RxCross2} h='8' w='8' onClick={()=>handleRemove(el)} />
+                  <Icon top={1} right={1} pos='absolute' color='red' cursor={'pointer'} as={AiFillHeart} h={5} w={5} onClick={()=>handleRemove(el)} />
                 </GridItem>
               )
             })

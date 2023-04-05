@@ -12,6 +12,8 @@ const mediaEndpoints = {
     getTrendingList: ({ mediaType, timeWindow,page=1 }) => `/media/trending/${mediaType}/${timeWindow}?page=${page}`,
 
     getMediaByGenre: ({ mediaType, genreId, page = 1 }) => `/media/discover/${mediaType}?with_genres=${genreId}&page=${page}`,
+
+    getHero:({mediaType,genre})=>`/media/hero?mediaType=${mediaType}&genre=${genre}`
     
 }
 
@@ -65,6 +67,16 @@ const mediaApi = {
         // console.log(mediaEndpoints.getMediaByGenre({ mediaType, genreId, page }))
         try {
             const response = await publicAxios.get(mediaEndpoints.getMediaByGenre({ mediaType, genreId,page }))
+            return response
+        } catch (error) {
+            return error
+        }
+    },
+
+    getHero: async ({ mediaType, genre }) => {
+        try {
+            console.log(mediaEndpoints.getHero({ mediaType, genre }))
+            const response = await publicAxios.get(mediaEndpoints.getHero({ mediaType, genre }))
             return response
         } catch (error) {
             return error

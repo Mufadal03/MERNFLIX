@@ -24,3 +24,6 @@ code {
   src: url("./utils/Helvetica\ Neue\ Medium\ Extended.ttf") format("embedded-opentype"),
     url("./utils/Helvetica\ Neue\ Medium\ Extended.ttf") format("truetype");
 }
+html{
+  scroll-behavior: smooth;
+}
