@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { getList, getDetail, getSearch, getGenre, getTrendingList, getMediaByGenre, getHero} = require('../controller/media.contorller')
+const { getList, getDetail, getSearch, getGenre, getTrendingList, getMediaByGenre, getHero} = require('../controller/media.controller')
 mediaRoutes = Router()
 mediaRoutes.get('/search/:mediaType', getSearch)
 

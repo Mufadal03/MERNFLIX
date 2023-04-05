@@ -14,7 +14,8 @@ const addToFav = async(req,res) => {
 }
 
 const getFav = async (req, res) => {
-    const { userId } = req.body 
+    const { userId} = req.body 
+    
     try {
         const data = await favouriteModel.find({ userId }).sort("-createdAt");
         res.status(200).send(data)

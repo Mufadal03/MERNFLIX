@@ -1,6 +1,5 @@
 const { genrate_hero_url } = require('../helper/genrateUrl')
 const { tvGenres, movieGenres } = require('../helper/genreDb')
-const { reviewModel } = require('../model/review.model')
 const { tmdbApi } = require('../tmdb/tmdb.api')
 
 const getHero = async (req, res) => {
@@ -11,7 +10,7 @@ const getHero = async (req, res) => {
         const type = mediaType?mediaType :customMediaType
         const url = genrate_hero_url(genre, type)
         const medias = await url
-        const index = Math.floor(Math.random() * 8)
+        const index = Math.floor(Math.random() * 5)
         const heroMedia = medias.results[index]
         const { id, backdrop_path, genre_ids, overview, title, poster_path, name } = heroMedia 
         const videos = await tmdbApi.mediaVideos({mediaType:type,mediaId:id})
@@ -35,7 +34,7 @@ const getHero = async (req, res) => {
 }
 
 
-const getList = async (req, res) => {
+const getList = async (req, res) => {   
     try {
         const { page = 1 } = req.query
         const { mediaType, mediaCategory } = req.params
