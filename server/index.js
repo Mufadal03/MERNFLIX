@@ -11,9 +11,7 @@ const { authenticator } = require('./middleware/authenticator')
 const { reviewRoutes } = require('./routes/review.routes')
 require('dotenv').config()
 app.use(cookieParser());
-app.use(cors({
-    origin:'*'
-}))
+app.use(cors())
 app.use(express.json())
 const PORT = process.env.PORT || 8080
 

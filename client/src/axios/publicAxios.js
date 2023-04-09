@@ -5,7 +5,14 @@ const publicAxios = axios.create({
     
 })
 
-
+publicAxios.interceptors.request.use(async config => {
+    return {
+        ...config,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    };
+});
 publicAxios.interceptors.response.use((response) => {
     if (response && response.data) return response.data 
     return response
