@@ -18,7 +18,8 @@ app.use(cors(
         ],
         allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token'],
         credentials: true,
-        exposedHeaders: ['*', 'Authorization']
+        exposedHeaders: ['*', 'Authorization'],
+        ['Access-Control-Allow-Origin']:'*'
     }
 ))
 app.use(express.json())
