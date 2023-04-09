@@ -1,11 +1,12 @@
 {
-  "name": "full-stack-movie-app-muffi",
+  "name": "mernflix",
   "version": "1.0.0",
-  "description": "movie app ",
+  "description": "webapp where user can watch trailers, add reviews to media, add media to playlist",
   "main": "index.js",
+  "engines": {"node":"14.x"},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "author": "Mufadal-Sadri",
   "license": "ISC",

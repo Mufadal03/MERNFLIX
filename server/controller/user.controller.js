@@ -4,7 +4,7 @@ const { userModel } = require('../model/user.model')
 
 const signUp = async(req, res) => {
     const { email, profilePic = '', password, username } = req.body
-    const user = await userModel.findOne({ email })
+    const user = await userModel.findOne({$or:[{email},{username}]})
     if(user!==null)return res.status(400).send({response:"User already exist",success:false})
     try {
         bcrypt.hash(password, 5, async(err, hash) => {
@@ -45,7 +45,7 @@ const signIn = async(req, res) => {
         res.status(400).send({response:'OOPS Something went wrong',success:false})
     }
 }
-
+ 
 const userInfo = async(req,res) => {
     const { userId } = req.body 
     try {
