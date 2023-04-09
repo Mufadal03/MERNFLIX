@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const privateAxios = axios.create({
-    baseURL:"http://localhost:8080"
+    baseURL:"https://mernflix-two.vercel.app"
 })
 
 privateAxios.interceptors.request.use((configs) => {

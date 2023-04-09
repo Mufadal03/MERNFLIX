@@ -12,35 +12,24 @@ const Hero = () => {
   const [data, setData] = useState()
   const [loading, setLoading] = useState(false)
   const { mediaType } = useParams()
-  const [seachParams,setSearchParams] = useSearchParams()
+  const [searchParams,setSearchParams] = useSearchParams()
   const location = useLocation()
-  const genre = seachParams.get('genre')
-  const [category,setCategory]= useState(genre || 'trending')
+  const [genre,setGenre]= useState( searchParams.get('genre') || 'trending')
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (genre !== null) {
-      setCategory(genre)
-      console.log(genre, 'running genre changed')
-    }
-  }, [genre])
-
-  useEffect(() => {
-    setCategory('trending')
-    console.log('running mediaType changed')
-  }, [mediaType])
- 
+    searchParams.get('genre') && setGenre(searchParams.get('genre'))
+  }, [searchParams])
   
+ 
   useEffect(() => {
     FetchMedia()
-    console.log('running category changed fetch')
-  }, [location.pathname, category])
+  }, [location.pathname, genre])
   
    const FetchMedia = async () => {
      try {   
        setLoading(true)
-       console.log('fetching')
-       const {response:hero} = await mediaApi.getHero({ mediaType:mediaType?mediaType:'', genre:category })
+       const {response:hero} = await mediaApi.getHero({ mediaType:mediaType?mediaType:'', genre:genre?genre:'' })
         setData({...hero})
         setLoading(false)
       } catch (error) {
@@ -70,7 +59,7 @@ const Hero = () => {
                 <Flex gap='.5rem' alignItems={'center'} justifyContent={{base:'center',sm:'flex-start'}}>
                   {
                 
-                    data?.genres.map((el,i) => data?.genres.length-1?<Flex key={el.id} alignItems={'center'}><GenreTypeCard bg='transparent' key={el.id} name={ el.name} /><Text as={'span'} h='5px' w='5px' bgColor='white' borderRadius={'full'}></Text></Flex>:<GenreTypeCard bg='transparent'  key={el.id} name={ el.name} />)
+                    data?.genres?.length>0 && data?.genres.map((el,i) => data?.genres.length-1?<Flex key={el.id} alignItems={'center'}><GenreTypeCard bg='transparent' key={el.id} name={ el.name} /><Text as={'span'} h='5px' w='5px' bgColor='white' borderRadius={'full'}></Text></Flex>:<GenreTypeCard bg='transparent'  key={el.id} name={ el.name} />)
                   }
                 </Flex>
                 <Flex gap='1rem' justifyContent={{base:'center',sm:'flex-start'}}>

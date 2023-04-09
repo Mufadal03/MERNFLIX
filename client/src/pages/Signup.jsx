@@ -26,6 +26,7 @@ const Signup = () => {
     if (username === '' || email === '' || password === '') return
     try {
       const res = await dispatch(signUp(userDetails))
+      console.log(res)
       toast({
         title: res.response,
         position: 'top',

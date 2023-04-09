@@ -1,6 +1,6 @@
 import publicAxios from "../../axios/publicAxios"
 
-const mediaEndpoints = {
+export const mediaEndpoints = {
     List: ({ mediaType, mediaCategory, page }) => `/media/${mediaType}/${mediaCategory}?page=${page}`,
 
     detail: ({ mediaType, mediaId }) => `media/detail/${mediaType}/${mediaId}`,
@@ -64,7 +64,6 @@ const mediaApi = {
     },
 
     getMediaByGenre: async ({ mediaType, genreId, page }) => {
-        // console.log(mediaEndpoints.getMediaByGenre({ mediaType, genreId, page }))
         try {
             const response = await publicAxios.get(mediaEndpoints.getMediaByGenre({ mediaType, genreId,page }))
             return response
@@ -74,9 +73,9 @@ const mediaApi = {
     },
 
     getHero: async ({ mediaType, genre }) => {
+        const controller = new AbortController()
         try {
-            console.log(mediaEndpoints.getHero({ mediaType, genre }))
-            const response = await publicAxios.get(mediaEndpoints.getHero({ mediaType, genre }))
+            const response = await publicAxios.get(mediaEndpoints.getHero({ mediaType, genre }),{signal:controller.signal})
             return response
         } catch (error) {
             return error

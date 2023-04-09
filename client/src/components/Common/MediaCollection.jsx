@@ -1,6 +1,6 @@
 
 import { Box,Flex, Grid, GridItem, Text } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useLocation, useParams, useSearchParams } from 'react-router-dom'
 import mediaApi from '../../api/modules/media.api'
 import { generateUrl } from '../../utils/genrateUrl'
@@ -20,32 +20,35 @@ const MediaCollection = () => {
     
   useEffect(() => {
       window.scrollTo(0, 0);
-      if(location.state===null)setGenre('trending')
-      setPage(1)
       setMedia([])
-  }, [location.pathname])
+      setPage(1)
+      setSearchParams({genre:'trending'})
+      if(location.state===null)setGenre('trending')
+  }, [mediaType])
     
-  useEffect(() => {
-      setSearchParams({
-          genre
-      })
-  }, [genre,mediaType])
-    
-    const fetchMedia = async () => {
-        try {
-                const response = await generateUrl(genre, mediaApi, page, tvGenres,movieGenres, mediaType)
-                setTotalPage(response.total_pages)
-                if (page === 1) setMedia(response.results)
-                else setMedia(prev=>[...prev,...response.results])
-            } catch (error) {
-                console.log(error)
-            }
+  
+    const fetchMedia = useCallback(async () => {
+          try {
+          const response = await generateUrl(genre, mediaApi, page, tvGenres, movieGenres, mediaType)
+          console.log(response)
+          setTotalPage(response.total_pages)
+          if (page === 1) setMedia(response.results)
+          else setMedia(prev=>[...prev,...response.results])
+        } catch (error) {
+            console.log(error)
         }
+        
+    }, [mediaType, page, genre])
+    
+    useEffect(() => {
+        setSearchParams({genre})
+    },[genre])
     useEffect(() => {
         fetchMedia()
     }, [mediaType, page,genre])
     
     
+
     const loadMore = () => {
         setPage(prev => prev + 1)
     }
