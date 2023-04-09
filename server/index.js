@@ -12,7 +12,7 @@ const { reviewRoutes } = require('./routes/review.routes')
 require('dotenv').config()
 app.use(cookieParser());
 app.use(cors({
-    origin:'http://localhost:3000'
+    origin:'*'
 }))
 app.use(express.json())
 const PORT = process.env.PORT || 8080
