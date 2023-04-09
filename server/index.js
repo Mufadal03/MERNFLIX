@@ -11,7 +11,16 @@ const { authenticator } = require('./middleware/authenticator')
 const { reviewRoutes } = require('./routes/review.routes')
 require('dotenv').config()
 app.use(cookieParser());
-app.use(cors())
+app.use(cors(
+    {
+        origin: [
+            "https://mern-flix.vercel.app/"
+        ],
+        allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token'],
+        credentials: true,
+        exposedHeaders: ['*', 'Authorization']
+    }
+))
 app.use(express.json())
 const PORT = process.env.PORT || 8080
 
